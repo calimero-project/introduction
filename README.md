@@ -48,4 +48,4 @@ This repository contains additional documentation for Calimero and code examples
 
 ### Java ME Embedded 8 Example:
 
-* [Java ME Embedded 8 Midlet](midlet/)
+* [Java ME Embedded 8 Midlet](examples/midlet/)
