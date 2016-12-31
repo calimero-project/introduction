@@ -11,11 +11,19 @@ This repository contains additional documentation for Calimero and code examples
 * [Use logging output](examples/Logging.java)
 * [KNX address converter](examples/KnxAddressConverter.java)
 
-### KNX Device Example:
+### Examples requiring Java 8 and Calimero version 2.4 (or later):
 
-* [2-state Push Button Device (example uses Calimero Java 8)](examples/java8/PushButtonActuator.java)
+* [Discover KNXnet/IP servers](src/main/java/DiscoverKnxServers.java)
+* [Discover KNX USB devices](src/main/java/DiscoverUsbDevices.java)
+* [Create client-side KNXnet/IP tunneling network link](src/main/java/CreateTunnelingLink.java)
+* [Create client-side KNX USB network link](src/main/java/CreateUsbLink.java)
+* [Create TPUART network monitor link](src/main/java/CreateTpuartMonitor.java)
 
-  - Run the actuator in your IDE. Or, from the terminal (put the required `jar` dependencies in the introduction directory: calimero-core, calimero-device, slf4j-api, slf4j-simple):
+#### KNX device
+
+* [2-state push button device](examples/java8/PushButtonActuator.java)
+
+  - Run the example in your IDE. Or, from the terminal (put the required `jar` dependencies in the introduction directory: calimero-core, calimero-device, slf4j-api, slf4j-simple):
 
  ~~~ sh
 	# Compile the actuator Java file
