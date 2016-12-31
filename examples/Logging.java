@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2013 B. Malinowsky
+    Copyright (c) 2013, 2016 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ import tuwien.auto.calimero.log.LogWriter;
 /**
  * This tutorial shows how to use basic logging functionality with Calimero.
  * <p>
- * 
+ *
  * @author B. Malinowsky
  */
 public class Logging
@@ -66,7 +66,7 @@ public class Logging
 
 		System.out.println("\nNow, create 1 log writer for warnings and 1 unformatted "
 				+ "log writer for all output");
-		
+
 		// Now, we create a writer that actually outputs the log information we obtain from that
 		// specific log service. In this example, we write to the standard output.
 		// You can also create a LogFileWriter for file output, a LogNetWriter to write to a
@@ -91,7 +91,7 @@ public class Logging
 		anotherLogger.log(LogLevel.ALWAYS,
 				"\nStart KNXnet/IP discovery and see what its log service produces:", null);
 
-	try {
+		try {
 			new Discoverer(0, false).startSearch(3, true);
 		}
 		catch (final KNXException e) {

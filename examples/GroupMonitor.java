@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2015 B. Malinowsky
+    Copyright (c) 2015, 2016 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ import tuwien.auto.calimero.process.ProcessListenerEx;
  * <p>
  * Note that this example does not exit, i.e., it monitors forever or until the connection of the
  * KNX network link is terminated. Hence, with KNX servers that have a limit on active tunneling
- * connections (usually 1), if the group monitor in connected state is terminated by the client
+ * connections (usually 1 or 4), if the group monitor in connected state is terminated by the client
  * (you), the pending state of the open tunnel on the KNX server might temporarily cause an error on
  * subsequent connection attempts.
  *
