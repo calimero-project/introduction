@@ -1,0 +1,30 @@
+// this gradle buildscript only builds the examples for calimero version >= 2.4
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+apply plugin:'java'
+apply plugin: 'eclipse'
+
+// specify an example you want to run
+// apply plugin: 'application'
+// mainClassName = "CreateTpuartMonitor"
+
+version = '2.4-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileJava.options*.compilerArgs = [
+	'-Xlint:all',
+	'-Werror'
+]
+
+dependencies {
+    compile "com.github.calimero:calimero-core:${version}"
+    runtime "com.github.calimero:calimero-rxtx:${version}"
+    runtime 'org.slf4j:slf4j-simple:1.7.21'
+}
