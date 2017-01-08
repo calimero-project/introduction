@@ -6,6 +6,7 @@
 *.ear
 /.settings
 /.classpath
+/bin/
 
 # MacOS
 /.DS_Store
