@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2016 B. Malinowsky
+    Copyright (c) 2016, 2017 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ import tuwien.auto.calimero.serial.usb.UsbConnection;
 
 /**
  * This example lists all found KNX USB and USB virtual serial devices. Only devices for KNX communication are listed
- * (if Calimero is able to identify them as such). Minimum requirements are Calimero version >= 2.4 and Java SE 8
+ * (if Calimero is able to identify them as such). Minimum requirements are Calimero version &ge; 2.4 and Java SE 8
  * compact1 profile.
  * <p>
  * You can safely run this example, no KNX messages are sent to the KNX network.

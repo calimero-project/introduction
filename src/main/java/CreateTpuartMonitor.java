@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2016 B. Malinowsky
+    Copyright (c) 2016, 2017 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ import tuwien.auto.calimero.link.MonitorFrameEvent;
 
 /**
  * This example shows how to establish a client network monitor ({@link KNXNetworkMonitor}) to a KNX TP1 network using
- * TP-UART serial communication. Minimum requirements are Calimero version >= 2.4 and Java SE 8 compact1 profile.
+ * TP-UART serial communication. Minimum requirements are Calimero version &ge; 2.4 and Java SE 8 compact1 profile.
  * <p>
  * You can safely run this example; the (established) monitor connection is completely passive. No KNX messages are sent
  * to the KNX network. The network monitor will run for 10 seconds to let you monitor some KNX frames.
