@@ -26,5 +26,5 @@ compileJava.options*.compilerArgs = [
 dependencies {
     compile "com.github.calimero:calimero-core:${version}"
     runtime "com.github.calimero:calimero-rxtx:${version}"
-    runtime 'org.slf4j:slf4j-simple:1.7.21'
+    runtime 'org.slf4j:slf4j-simple:1.7.22'
 }
