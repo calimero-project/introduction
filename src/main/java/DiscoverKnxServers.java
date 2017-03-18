@@ -44,20 +44,14 @@ public class DiscoverKnxServers
 			discoverer.startSearch(3, true);
 
 			// print out responding servers
-			discoverer.getSearchResponses().forEach(r -> System.out.format("%s %s <= %s %s%n",
+			discoverer.getSearchResponses().forEach(r -> System.out.format("%s %s <= %s%n",
 					r.getNetworkInterface().getName(),
 					r.getAddress(),
-					r.getResponse().getControlEndpoint(),
-					r.getResponse().getDevice().toString().replace(", ", "\n\t")));
+					r.getResponse().toString().replace(", ", "\n\t")));
 		}
 		catch (KNXException | InterruptedException e) {
 			// KNXException: all Calimero-specific checked exceptions are subtypes of KNXException
-
-			// InterruptedException: longer tasks that might block are interruptible, e.g., connection procedures. In
-			// such case, an instance of InterruptedException is thrown.
-			// If a task got interrupted, Calimero will clean up its internal state and resources accordingly.
-			// Any deviation of such behavior, e.g., where not feasible, is documented in the Calimero API.
-
+			// InterruptedException: longer tasks that might block are interruptible, e.g., server search.
 			System.out.println("Error during KNXnet/IP discovery: " + e);
 		}
 	}
