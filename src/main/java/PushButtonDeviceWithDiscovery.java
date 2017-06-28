@@ -71,7 +71,7 @@ import tuwien.auto.calimero.link.medium.KnxIPSettings;
 
 /**
  * A KNX IP device that acts as 2-state push button (switch) in a KNX installation. This example extends upon the
- * {@link PushButtonDevice} example and supports KNX IP discovery & self description.
+ * {@link PushButtonDevice} example and supports KNX IP discovery {@literal &} self description.
  * <p>
  * This example is only concerned with KNX process communication, it will not show any KNX device management. Note that
  * {@link KnxDeviceServiceLogic} already implements most of the KNX device management logic, too.
