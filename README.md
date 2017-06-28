@@ -13,6 +13,8 @@ This repository contains additional documentation for Calimero and code examples
 
 ### Examples for Calimero version 2.4 snapshots (requires Java 8)
 
+All examples can be built (not executed) using Gradle (`./gradlew build`)
+
 * [Discover KNXnet/IP servers](src/main/java/DiscoverKnxServers.java)
 * [Discover KNX USB devices](src/main/java/DiscoverUsbDevices.java)
 * [Create client-side KNXnet/IP tunneling network link](src/main/java/CreateTunnelingLink.java)
