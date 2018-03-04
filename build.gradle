@@ -10,8 +10,8 @@ apply plugin:'java'
 apply plugin: 'eclipse'
 
 // specify an example you want to run
-// apply plugin: 'application'
-// mainClassName = "CreateTpuartMonitor"
+apply plugin: 'application'
+mainClassName = "DiscoverKnxServers"
 
 version = '2.4-SNAPSHOT'
 
@@ -28,5 +28,5 @@ dependencies {
     compile "com.github.calimero:calimero-core:${version}"
     compile "com.github.calimero:calimero-device:${version}"
     runtime "com.github.calimero:calimero-rxtx:${version}"
-    runtime 'org.slf4j:slf4j-simple:1.7.22'
+    runtime 'org.slf4j:slf4j-simple:1.8.0-beta1'
 }

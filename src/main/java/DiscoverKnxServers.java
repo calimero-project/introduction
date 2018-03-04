@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2016, 2017 B. Malinowsky
+    Copyright (c) 2016, 2018 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ public class DiscoverKnxServers
 			discoverer.startSearch(3, true);
 
 			// print out responding servers
-			discoverer.getSearchResponses().forEach(r -> System.out.format("%s %s <= %s%n",
+			discoverer.getSearchResponses().forEach(r -> System.out.format("%s %s <=> %s%n",
 					r.getNetworkInterface().getName(),
 					r.getAddress(),
 					r.getResponse().toString().replace(", ", "\n\t")));
