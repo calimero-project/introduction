@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2015, 2017 B. Malinowsky
+    Copyright (c) 2015, 2018 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -72,9 +72,13 @@ public class GroupMonitor implements ProcessListener
 		}
 	}
 
+	@Override
 	public void groupWrite(final ProcessEvent e) { print("write.ind", e); }
+	@Override
 	public void groupReadRequest(final ProcessEvent e) { print("read.req", e); }
+	@Override
 	public void groupReadResponse(final ProcessEvent e) { print("read.res", e); }
+	@Override
 	public void detached(final DetachEvent e) {}
 
 	// Called on every group notification issued by a datapoint on the KNX network. It prints the service primitive,
