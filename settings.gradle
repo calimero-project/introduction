@@ -1,0 +1,3 @@
+if (JavaVersion.current().isJava9Compatible()) {
+	include ":2.5"
+}

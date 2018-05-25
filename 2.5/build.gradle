@@ -1,0 +1,30 @@
+// this gradle buildscript only builds the examples for calimero version >= 2.5
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+apply plugin:'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+// specify an example we want to run
+mainClassName = "KnxipSecure"
+
+version = '2.5-SNAPSHOT'
+
+sourceCompatibility = 9
+targetCompatibility = 9
+
+compileJava.options*.compilerArgs = [
+	'-Xlint:all',
+	'-Xlint:-options',
+]
+
+dependencies {
+    compile "com.github.calimero:calimero-core:${version}"
+    compile "com.github.calimero:calimero-device:${version}"
+    runtime 'org.slf4j:slf4j-simple:1.8.0-beta2'
+}

@@ -11,7 +11,7 @@ This repository contains additional documentation for Calimero and code examples
 * [Use logging output](examples/Logging.java)
 * [KNX address converter](examples/KnxAddressConverter.java)
 
-### Examples for Calimero version 2.4 snapshots (requires Java 8)
+### Examples for Calimero version 2.4 (requires Java 8)
 
 All examples can be built (not executed) using Gradle (`./gradlew build`)
 
@@ -26,6 +26,12 @@ All examples can be built (not executed) using Gradle (`./gradlew build`)
 * [Network state buffering](src/main/java/NetworkStateBuffering.java)
 * [KNX push-button device](src/main/java/PushButtonDevice.java)
 * [KNX IP push-button device supporting discovery & self description](src/main/java/PushButtonDeviceWithDiscovery.java)
+
+### Examples for Calimero version 2.5 snapshots (requires Java 9)
+
+Build examples using `./gradlew :2.5:build`, run with `./gradlew :2.5:run`
+
+* [KNX IP Secure routing network link](2.5/src/main/java/KnxipSecure.java)
 
 #### Guide for the KNX push-button device example
 
