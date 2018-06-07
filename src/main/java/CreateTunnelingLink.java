@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2016, 2017 B. Malinowsky
+    Copyright (c) 2016, 2018 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@ public class CreateTunnelingLink
 		// A KNX tunneling link supports NAT (Network Address Translation) if required.
 		// We also indicate that the KNX installation uses twisted-pair (TP) medium, with TP1 being the most common.
 		// KNXNetworkLink is the base interface implemented by all supported Calimero links to a KNX network.
-		try (final KNXNetworkLink knxLink = KNXNetworkLinkIP.newTunnelingLink(local, server, false, TPSettings.TP1)) {
+		try (KNXNetworkLink knxLink = KNXNetworkLinkIP.newTunnelingLink(local, server, false, TPSettings.TP1)) {
 			System.out.println("Connection established to server " + knxLink.getName());
 			System.out.println("Close connection again");
 		}

@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2015, 2017 B. Malinowsky
+    Copyright (c) 2015, 2018 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -106,7 +106,7 @@ public class PushButtonDevice extends KnxDeviceServiceLogic
 
 		// Create the network link on which KNX messages are received from, and sent on
 		// We create a KNX IP link here (hence, it will only work on a KNX IP network!)
-		try (final KNXNetworkLink link = KNXNetworkLinkIP.newRoutingLink((NetworkInterface) null, null,
+		try (KNXNetworkLink link = KNXNetworkLinkIP.newRoutingLink((NetworkInterface) null, null,
 				new KnxIPSettings(deviceAddress))) {
 			device.setDeviceLink(link);
 
