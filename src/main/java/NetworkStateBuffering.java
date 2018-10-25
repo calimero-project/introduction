@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2016, 2017 B. Malinowsky
+    Copyright (c) 2016, 2018 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@ public class NetworkStateBuffering
 	public static void main(final String[] args) throws UnknownHostException, KNXException, InterruptedException
 	{
 		// Like always, create a network link of your choice
-		try (final KNXNetworkLink link = KNXNetworkLinkIP.newRoutingLink((NetworkInterface) null,
+		try (KNXNetworkLink link = KNXNetworkLinkIP.newRoutingLink((NetworkInterface) null,
 				InetAddress.getByName(KNXnetIPRouting.DEFAULT_MULTICAST), new KnxIPSettings(null))) {
 
 			// setup Calimero network buffer
@@ -59,7 +59,7 @@ public class NetworkStateBuffering
 			final KNXNetworkLink bufferedLink = config.getBufferedLink();
 
 			// Poll the buffered link
-			try (final ProcessCommunicatorImpl pc = new ProcessCommunicatorImpl(bufferedLink)) {
+			try (ProcessCommunicatorImpl pc = new ProcessCommunicatorImpl(bufferedLink)) {
 				// in the best case, the following loop will generate no traffic at all on the KNX network
 				// in the worst case, the following loop will generate only 1 actual read on the KNX network
 				for (int i = 0; i < 100; i++)

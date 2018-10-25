@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2016, 2017 B. Malinowsky
+    Copyright (c) 2016, 2018 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ import tuwien.auto.calimero.link.MonitorFrameEvent;
  */
 public class CreateTpuartMonitor
 {
-	/** Specify the serial port of your KNX TP-UART device */
+	/** Specify the serial port of your KNX TP-UART device. */
 	private static final String portId = "/dev/ttyACM0";
 
 	public static void main(final String[] args) throws KNXException, InterruptedException
@@ -45,7 +45,7 @@ public class CreateTpuartMonitor
 
 		// Create the TP-UART monitoring link to a TP1 KNX network.
 		// The second argument indicates that we want the monitor to provide decoded raw frames for us.
-		try (final KNXNetworkMonitor knxMonitor = new KNXNetworkMonitorTpuart(portId, true)) {
+		try (KNXNetworkMonitor knxMonitor = new KNXNetworkMonitorTpuart(portId, true)) {
 			System.out.println("Connection established");
 
 			// add listener to notify us of any indication, and provide us with the decoded raw frame
