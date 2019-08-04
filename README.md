@@ -32,6 +32,8 @@ All examples can be built (not executed) using Gradle (`./gradlew build`)
 Build examples using `./gradlew :2.5:build`, run with `./gradlew :2.5:run`
 
 * [KNX IP Secure routing network link](2.5/src/main/java/KnxipSecure.java)
+* [ETS keyring viewer](2.5/src/main/java/KeyringViewer.java), run it with Gradle using
+	`./gradlew :2.5:run -DmainClass=KeyringViewer --args="--pwd pwd '/path/to/keyring.knxkeys'"`	
 
 #### Guide for the KNX push-button device example
 
