@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2018 B. Malinowsky
+    Copyright (c) 2018, 2019 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@ import java.net.UnknownHostException;
 import java.time.Duration;
 
 import tuwien.auto.calimero.CloseEvent;
+import tuwien.auto.calimero.DataUnitBuilder;
 import tuwien.auto.calimero.FrameEvent;
 import tuwien.auto.calimero.KNXException;
 import tuwien.auto.calimero.link.KNXNetworkLink;
@@ -33,7 +34,7 @@ import tuwien.auto.calimero.link.medium.TPSettings;
 
 /**
  * This example shows how to establish a secure client routing link using KNX IP Secure. Minimum requirements are
- * Calimero version &ge; 2.5 and Java SE 9 (module java.base).
+ * Calimero version &ge; 2.5 and Java SE 11 (module java.base).
  * <p>
  * You can safely run this example, the (established) connection listens to incoming frames and is closed without
  * sending KNX messages to the KNX network.
@@ -49,20 +50,23 @@ public class KnxipSecure {
 	private static final InetAddress multicastGroup = KNXNetworkLinkIP.DefaultMulticast;
 
 	/** Insert here your KNX IP Secure group key (backbone key). */
-	private static final byte[] groupKey = fromHex("85A0723F8C58A33333E4B6B7037C4F18");
+	private static final byte[] groupKey = DataUnitBuilder.fromHex("85A0723F8C58A33333E4B6B7037C4F18");
 
 	/** Time window for accepting secure multicasts. */
 	private static final Duration latencyTolerance = Duration.ofMillis(1000);
 
 	public static void main(final String[] args) throws SocketException, UnknownHostException {
-		System.out.println("This example establishes a secure routing link for multicast group " + multicastGroup);
+		final var duration = Duration.ofSeconds(60);
+		System.out.println("This example establishes a secure routing link for multicast group "
+				+ multicastGroup.getHostAddress() + ", and waits for secure routing packets for "
+				+ duration.toSeconds() + " seconds");
 
 		// Find the local network interface by IP address
 		final NetworkInterface netif = NetworkInterface.getByInetAddress(InetAddress.getByName(local));
 
 		// Our KNX installation uses twisted-pair (TP) 1 medium
 		try (KNXNetworkLink link = KNXNetworkLinkIP.newSecureRoutingLink(netif, multicastGroup, groupKey, latencyTolerance, TPSettings.TP1)) {
-			
+
 			link.addLinkListener(new NetworkLinkListener() {
 				@Override
 				public void linkClosed(final CloseEvent e) {}
@@ -77,7 +81,7 @@ public class KnxipSecure {
 			});
 
 			System.out.println("Secure link established for " + link.getName());
-			Thread.sleep(60000);
+			Thread.sleep(duration.toMillis());
 		}
 		catch (KNXException | InterruptedException e) {
 			System.out.println("Error creating KNX IP secure routing link: " + e);
@@ -85,13 +89,5 @@ public class KnxipSecure {
 		finally {
 			System.out.println("Link closed");
 		}
-	}
-
-	private static byte[] fromHex(final String hex) {
-		final int len = hex.length();
-		final byte[] data = new byte[len / 2];
-		for (int i = 0; i < len; i += 2)
-			data[i / 2] = (byte) ((Character.digit(hex.charAt(i), 16) << 4) + Character.digit(hex.charAt(i + 1), 16));
-		return data;
 	}
 }

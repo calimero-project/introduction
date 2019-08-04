@@ -27,7 +27,7 @@ All examples can be built (not executed) using Gradle (`./gradlew build`)
 * [KNX push-button device](src/main/java/PushButtonDevice.java)
 * [KNX IP push-button device supporting discovery & self description](src/main/java/PushButtonDeviceWithDiscovery.java)
 
-### Examples for Calimero version 2.5 snapshots (requires Java 9)
+### Examples for Calimero version 2.5 snapshots (requires Java 11)
 
 Build examples using `./gradlew :2.5:build`, run with `./gradlew :2.5:run`
 
