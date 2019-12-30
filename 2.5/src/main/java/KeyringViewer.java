@@ -85,7 +85,7 @@ public class KeyringViewer {
 		System.out.println("------");
 		for (final var group : keyring.groups().entrySet()) {
 			if (keyringPwd.length > 0)
-				System.out.print(group.getKey() + " key " + decryptKey(group.getValue()));
+				System.out.println(group.getKey() + " key " + decryptKey(group.getValue()));
 			else
 				System.out.println(group.getKey());
 		}
