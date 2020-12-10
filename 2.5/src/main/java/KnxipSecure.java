@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2018, 2019 B. Malinowsky
+    Copyright (c) 2018, 2020 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,7 +27,6 @@ import tuwien.auto.calimero.CloseEvent;
 import tuwien.auto.calimero.DataUnitBuilder;
 import tuwien.auto.calimero.FrameEvent;
 import tuwien.auto.calimero.KNXException;
-import tuwien.auto.calimero.link.KNXNetworkLink;
 import tuwien.auto.calimero.link.KNXNetworkLinkIP;
 import tuwien.auto.calimero.link.NetworkLinkListener;
 import tuwien.auto.calimero.link.medium.TPSettings;
@@ -52,8 +51,6 @@ public class KnxipSecure {
 	/** Insert here your KNX IP Secure group key (backbone key). */
 	private static final byte[] groupKey = DataUnitBuilder.fromHex("85A0723F8C58A33333E4B6B7037C4F18");
 
-	/** Time window for accepting secure multicasts. */
-	private static final Duration latencyTolerance = Duration.ofMillis(1000);
 
 	public static void main(final String[] args) throws SocketException, UnknownHostException {
 		final var duration = Duration.ofSeconds(60);
@@ -65,19 +62,18 @@ public class KnxipSecure {
 		final NetworkInterface netif = NetworkInterface.getByInetAddress(InetAddress.getByName(local));
 
 		// Our KNX installation uses twisted-pair (TP) 1 medium
-		try (KNXNetworkLink link = KNXNetworkLinkIP.newSecureRoutingLink(netif, multicastGroup, groupKey, latencyTolerance, TPSettings.TP1)) {
+		try (var link = KNXNetworkLinkIP.newSecureRoutingLink(netif, multicastGroup, groupKey, Duration.ofMillis(1000),
+				new TPSettings())) {
 
 			link.addLinkListener(new NetworkLinkListener() {
 				@Override
-				public void linkClosed(final CloseEvent e) {}
-
-				@Override
-				public void indication(final FrameEvent e) {
-					System.out.println(e.getFrame());
-				}
+				public void indication(final FrameEvent e) { System.out.println(e.getFrame()); }
 
 				@Override
 				public void confirmation(final FrameEvent e) {}
+
+				@Override
+				public void linkClosed(final CloseEvent e) {}
 			});
 
 			System.out.println("Secure link established for " + link.getName());
