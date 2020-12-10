@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2019 B. Malinowsky
+    Copyright (c) 2019, 2020 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,6 +16,8 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
+
+import java.util.Optional;
 
 import tuwien.auto.calimero.DataUnitBuilder;
 import tuwien.auto.calimero.Keyring;
@@ -53,11 +55,14 @@ public class KeyringViewer {
 			final var valid = keyring.verifySignature(keyringPwd);
 			final var result = valid ? "OK" : "FAILED!";
 			System.out.println("Signature verification " + result);
-			System.out.println();
 		}
 
-		System.out.println("Devices");
-		System.out.println("-------");
+		keyring.backbone().ifPresent(bb -> {
+			header("Backbone");
+			System.out.println(bb + (keyringPwd.length > 0 ? ", key " + decryptKey(bb.groupKey()) : ""));
+		});
+
+		header("Devices");
 		for (final var device : keyring.devices().values()) {
 			System.out.print(device);
 			if (keyringPwd.length > 0) {
@@ -68,8 +73,7 @@ public class KeyringViewer {
 		}
 
 		for (final var entry : keyring.interfaces().entrySet()) {
-			System.out.println("Interfaces of device " + entry.getKey());
-			System.out.println("---------------------------");
+			header("Interfaces of device " + entry.getKey());
 			final var interfaces = entry.getValue();
 			for (final var iface : interfaces) {
 				System.out.print(iface);
@@ -81,8 +85,7 @@ public class KeyringViewer {
 			}
 		}
 
-		System.out.println("Groups");
-		System.out.println("------");
+		header("Groups");
 		for (final var group : keyring.groups().entrySet()) {
 			if (keyringPwd.length > 0)
 				System.out.println(group.getKey() + " key " + decryptKey(group.getValue()));
@@ -91,11 +94,19 @@ public class KeyringViewer {
 		}
 	}
 
+	private String decryptPwd(final Optional<byte[]> input) {
+		return input.map(this::decryptPwd).orElse("n/a");
+	}
+
 	private String decryptPwd(final byte[] input) {
 		return "'" + new String(keyring.decryptPassword(input, keyringPwd)) + "'";
 	}
 
 	private String decryptKey(final byte[] input) {
 		return "'" + DataUnitBuilder.toHex(keyring.decryptKey(input, keyringPwd), "") + "'";
+	}
+
+	private static void header(final String header) {
+		System.out.format("%n%s%n%s%n", header, "-".repeat(header.length()));
 	}
 }
