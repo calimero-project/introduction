@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2015, 2019 B. Malinowsky
+    Copyright (c) 2015, 2020 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -142,7 +142,8 @@ public class PushButtonDeviceWithDiscovery extends KnxDeviceServiceLogic
 			}
 
 			// prepare the info we want to return for search/description responses
-			final NetworkInterface ni = NetworkInterface.getByInetAddress(InetAddress.getLocalHost());
+			final InetAddress localHost = InetAddress.getLocalHost();
+			final NetworkInterface ni = NetworkInterface.getByInetAddress(localHost);
 			final byte[] mac = ni != null ? ni.getHardwareAddress() : null;
 			final InetAddress mcast = InetAddress.getByName(KNXnetIPRouting.DEFAULT_MULTICAST);
 			final DeviceDIB device = new DeviceDIB(deviceName, 0, 0, KNXMediumSettings.MEDIUM_KNXIP, deviceAddress,
@@ -152,7 +153,7 @@ public class PushButtonDeviceWithDiscovery extends KnxDeviceServiceLogic
 
 			final byte[] buf;
 			if (svc == SEARCH_REQ) {
-				final HPAI ctrlEndpoint = new HPAI((InetAddress) null, ctrlEndpt.getPort());
+				final HPAI ctrlEndpoint = new HPAI(localHost, ctrlEndpt.getPort());
 				buf = PacketHelper.toPacket(new SearchResponse(ctrlEndpoint, device, svcFamilies));
 			}
 			else
