@@ -15,4 +15,5 @@ targetCompatibility = 11
 
 dependencies {
     compile "com.github.calimero:calimero-core:${version}"
+    compile "com.github.calimero:calimero-device:${version}"
 }
