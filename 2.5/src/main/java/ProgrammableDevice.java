@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2015, 2020 B. Malinowsky
+    Copyright (c) 2015, 2021 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -82,6 +82,10 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 	// Used for KNXnet/IP device discovery, and therefore, limited to a maximum of 29 ISO 8859-1 characters.
 	private static final String deviceName = "Programmable Device (KNX IP)";
 
+	// Name of the network interface to use for KNX IP Routing
+	private static final String networkInterface = "eth0";
+
+	// Set true to adjust device identication for programming and activate programming mode, false otherwise
 	private static boolean prepareForProgramming = true;
 
 	// The initial KNX device address of our device. A device's individual address is mainly used for device management
@@ -101,7 +105,7 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 		// Specify storage of device's interface object server (IOS). A device will initialize it's IOS from it if the
 		// resource exists; otherwise, the resource is created during closing the device.
 		// If you program a secure device, you might want to use a non-empty password for file encryption in BaseKnxDevice constructor.
-		final var iosResource = Path.of(".", "src", "main", "resources", "interfaceObjects.xml").toAbsolutePath().normalize();
+		final var iosResource = Path.of(".", "src", "main", "resources", "device.xml").toAbsolutePath().normalize();
 
 		try (var device = new BaseKnxDevice(deviceName, logic, iosResource.toUri(), new char[0]);
 			var routing = new DeviceRouting();
@@ -153,7 +157,7 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 		// TODO how to init secure routing?
 		DeviceRouting() throws KNXException, SocketException {
 			super(KNXnetIPRouting.DefaultMulticast);
-			init(NetworkInterface.getByName("en0"), false, true);
+			init(NetworkInterface.getByName(networkInterface), false, true);
 		}
 
 		@Override
