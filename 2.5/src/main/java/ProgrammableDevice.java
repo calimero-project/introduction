@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.MulticastSocket;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.nio.file.Path;
@@ -107,9 +108,10 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 		// If you program a secure device, you might want to use a non-empty password for file encryption in BaseKnxDevice constructor.
 		final var iosResource = Path.of(".", "src", "main", "resources", "device.xml").toAbsolutePath().normalize();
 
+		final var ipSettings = new KnxIPSettings(deviceAddress);
 		try (var device = new BaseKnxDevice(deviceName, logic, iosResource.toUri(), new char[0]);
-			var routing = new DeviceRouting();
-			var link = new KNXNetworkLinkIP(2, routing, new KnxIPSettings(deviceAddress)) {}) {
+			var routing = new DeviceRouting(ipSettings);
+			var link = new KNXNetworkLinkIP(2, routing, ipSettings) {}) {
 
 			if (prepareForProgramming) {
 				// prepare identification usually required for ETS download
@@ -154,9 +156,12 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 
 	// We override the KNXnet/IP routing implementation to filter and respond to KNXnet/IP search/description requests
 	private static class DeviceRouting extends KNXnetIPRouting {
+		private final KnxIPSettings ipSettings;
+
 		// TODO how to init secure routing?
-		DeviceRouting() throws KNXException, SocketException {
+		DeviceRouting(final KnxIPSettings ipSettings) throws KNXException, SocketException {
 			super(KNXnetIPRouting.DefaultMulticast);
+			this.ipSettings = ipSettings;
 			init(NetworkInterface.getByName(networkInterface), false, true);
 		}
 
@@ -175,18 +180,18 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 				return true;
 
 			// prepare the info we want to return for search/description responses
-			final InetAddress localHost = InetAddress.getLocalHost();
-			final NetworkInterface ni = NetworkInterface.getByInetAddress(localHost);
+			final var ni = ((MulticastSocket) socket).getNetworkInterface();
 			final byte[] mac = ni != null ? ni.getHardwareAddress() : null;
-			final InetAddress mcast = InetAddress.getByName(KNXnetIPRouting.DEFAULT_MULTICAST);
-			final DeviceDIB device = new DeviceDIB(deviceName, 0, 0, KNXMediumSettings.MEDIUM_KNXIP, deviceAddress,
-					new byte[6], mcast, mac != null ? mac : new byte[6]);
+
+			final DeviceDIB device = new DeviceDIB(deviceName, 0, 0, KNXMediumSettings.MEDIUM_KNXIP,
+					ipSettings.getDeviceAddress(), new byte[6], KNXnetIPRouting.DefaultMulticast,
+					mac != null ? mac : new byte[6]);
 			final ServiceFamiliesDIB svcFamilies = new ServiceFamiliesDIB(new int[] { ServiceFamiliesDIB.CORE },
 					new int[] { 1 });
 
 			final byte[] buf;
 			if (svc == SEARCH_REQ) {
-				final HPAI ctrlEndpoint = new HPAI(localHost, ctrlEndpt.getPort());
+				final HPAI ctrlEndpoint = new HPAI(InetAddress.getLocalHost(), ctrlEndpt.getPort());
 				buf = PacketHelper.toPacket(new SearchResponse(ctrlEndpoint, device, svcFamilies));
 			}
 			else
