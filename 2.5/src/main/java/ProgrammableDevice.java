@@ -51,6 +51,7 @@ import tuwien.auto.calimero.DeviceDescriptor.DD0;
 import tuwien.auto.calimero.IndividualAddress;
 import tuwien.auto.calimero.KNXException;
 import tuwien.auto.calimero.KNXFormatException;
+import tuwien.auto.calimero.SerialNumber;
 import tuwien.auto.calimero.datapoint.Datapoint;
 import tuwien.auto.calimero.device.BaseKnxDevice;
 import tuwien.auto.calimero.device.KnxDeviceServiceLogic;
@@ -118,7 +119,7 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 				// unused parts can have arbitrary values
 				final var deviceDescriptor = DD0.TYPE_0701;
 				final int manufacturerId = 0x04;
-				final byte[] serialNumber = DataUnitBuilder.fromHex("000a1c112913"); // 6 bytes
+				final var serialNumber = SerialNumber.from(DataUnitBuilder.fromHex("000a1c112913")); // 6 bytes
 				final byte[] hardwareType = DataUnitBuilder.fromHex("000000000223"); // 6 bytes
 				final byte[] programVersion = new byte[] { 0, 4, 0, 0, 0 }; // 5 bytes
 				// a valid FDSK is only required for secure device download
@@ -183,8 +184,9 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 			final var ni = ((MulticastSocket) socket).getNetworkInterface();
 			final byte[] mac = ni != null ? ni.getHardwareAddress() : null;
 
+			final var sno = SerialNumber.Zero;
 			final DeviceDIB device = new DeviceDIB(deviceName, 0, 0, KNXMediumSettings.MEDIUM_KNXIP,
-					ipSettings.getDeviceAddress(), new byte[6], KNXnetIPRouting.DefaultMulticast,
+					ipSettings.getDeviceAddress(), sno, KNXnetIPRouting.DefaultMulticast,
 					mac != null ? mac : new byte[6]);
 			final ServiceFamiliesDIB svcFamilies = new ServiceFamiliesDIB(new int[] { ServiceFamiliesDIB.CORE },
 					new int[] { 1 });
