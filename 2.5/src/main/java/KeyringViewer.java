@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2019, 2020 B. Malinowsky
+    Copyright (c) 2019, 2021 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -68,6 +68,7 @@ public class KeyringViewer {
 			if (keyringPwd.length > 0) {
 				System.out.print(", management password " + decryptPwd(device.password()));
 				System.out.print(", authentication " + decryptPwd(device.authentication()));
+				System.out.print(", toolkey " + device.toolKey().map(this::decryptKey).orElse("n/a"));
 			}
 			System.out.println();
 		}
