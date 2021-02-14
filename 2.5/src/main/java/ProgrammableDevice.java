@@ -45,6 +45,7 @@ import java.net.MulticastSocket;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.nio.file.Path;
+import java.util.Map;
 
 import tuwien.auto.calimero.DataUnitBuilder;
 import tuwien.auto.calimero.DeviceDescriptor.DD0;
@@ -66,6 +67,7 @@ import tuwien.auto.calimero.knxnetip.servicetype.SearchResponse;
 import tuwien.auto.calimero.knxnetip.util.DeviceDIB;
 import tuwien.auto.calimero.knxnetip.util.HPAI;
 import tuwien.auto.calimero.knxnetip.util.ServiceFamiliesDIB;
+import tuwien.auto.calimero.knxnetip.util.ServiceFamiliesDIB.ServiceFamily;
 import tuwien.auto.calimero.link.KNXNetworkLinkIP;
 import tuwien.auto.calimero.link.medium.KNXMediumSettings;
 import tuwien.auto.calimero.link.medium.KnxIPSettings;
@@ -188,8 +190,7 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 			final DeviceDIB device = new DeviceDIB(deviceName, 0, 0, KNXMediumSettings.MEDIUM_KNXIP,
 					ipSettings.getDeviceAddress(), sno, KNXnetIPRouting.DefaultMulticast,
 					mac != null ? mac : new byte[6]);
-			final ServiceFamiliesDIB svcFamilies = new ServiceFamiliesDIB(new int[] { ServiceFamiliesDIB.CORE },
-					new int[] { 1 });
+			final var svcFamilies = new ServiceFamiliesDIB(Map.of(ServiceFamily.Core, 1));
 
 			final byte[] buf;
 			if (svc == SEARCH_REQ) {
