@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2018, 2020 B. Malinowsky
+    Copyright (c) 2018, 2021 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,7 +23,6 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.time.Duration;
 
-import tuwien.auto.calimero.CloseEvent;
 import tuwien.auto.calimero.DataUnitBuilder;
 import tuwien.auto.calimero.FrameEvent;
 import tuwien.auto.calimero.KNXException;
@@ -68,12 +67,6 @@ public class KnxipSecure {
 			link.addLinkListener(new NetworkLinkListener() {
 				@Override
 				public void indication(final FrameEvent e) { System.out.println(e.getFrame()); }
-
-				@Override
-				public void confirmation(final FrameEvent e) {}
-
-				@Override
-				public void linkClosed(final CloseEvent e) {}
 			});
 
 			System.out.println("Secure link established for " + link.getName());
