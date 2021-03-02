@@ -1,44 +1,44 @@
-// this gradle buildscript only builds the examples for calimero version >= 2.4
+// this gradle buildscript only builds the examples for calimero version >= 2.5
 plugins {
 	id "com.github.ben-manes.versions" version "0.36.0"
 }
 
-version = '2.4'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
 
-allprojects {
-	repositories {
-	    mavenLocal()
-	    mavenCentral()
-	    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-	}
-
-	apply plugin: 'java'
-	apply plugin: 'eclipse'
-	apply plugin: 'application'
-
-	[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-	compileJava.options*.compilerArgs = [
-		'-Xlint:all',
-		'-Xlint:-options',
-	]
-	
-	dependencies {
-	    compile "com.github.calimero:calimero-core:${version}"
-	    runtime 'org.slf4j:slf4j-simple:1.8.0-beta4'
-	}
-}
-
-subprojects {
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
 // specify an example you want to run
 mainClassName = "DiscoverKnxServers"
 
-sourceCompatibility = 8
-targetCompatibility = 8
+// specify an example we want to run
+run {
+	ext.mainClass = System.properties.containsKey('mainClass') ? System.getProperty('mainClass') : "DiscoverKnxServers"
+	mainClassName = ext.mainClass
+
+	systemProperties System.getProperties()
+}
+
+version = '2.5-M1'
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+compileJava.options*.compilerArgs = [
+	'-Xlint:all',
+	'-Xlint:-options',
+]
 
 dependencies {
     compile 'org.usb4java:usb4java-javax:1.3.0'
+    compile "com.github.calimero:calimero-core:${version}"
     compile "com.github.calimero:calimero-device:${version}"
     runtime "com.github.calimero:calimero-rxtx:${version}"
+	runtime 'org.slf4j:slf4j-simple:1.7.30'
 }
