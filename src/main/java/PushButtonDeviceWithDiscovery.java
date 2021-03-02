@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2015, 2020 B. Malinowsky
+    Copyright (c) 2015, 2021 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -48,6 +48,7 @@ import tuwien.auto.calimero.GroupAddress;
 import tuwien.auto.calimero.IndividualAddress;
 import tuwien.auto.calimero.KNXException;
 import tuwien.auto.calimero.KNXFormatException;
+import tuwien.auto.calimero.SerialNumber;
 import tuwien.auto.calimero.datapoint.Datapoint;
 import tuwien.auto.calimero.datapoint.StateDP;
 import tuwien.auto.calimero.device.BaseKnxDevice;
@@ -64,7 +65,6 @@ import tuwien.auto.calimero.knxnetip.servicetype.SearchResponse;
 import tuwien.auto.calimero.knxnetip.util.DeviceDIB;
 import tuwien.auto.calimero.knxnetip.util.HPAI;
 import tuwien.auto.calimero.knxnetip.util.ServiceFamiliesDIB;
-import tuwien.auto.calimero.link.KNXNetworkLink;
 import tuwien.auto.calimero.link.KNXNetworkLinkIP;
 import tuwien.auto.calimero.link.medium.KNXMediumSettings;
 import tuwien.auto.calimero.link.medium.KnxIPSettings;
@@ -147,7 +147,7 @@ public class PushButtonDeviceWithDiscovery extends KnxDeviceServiceLogic
 			final byte[] mac = ni != null ? ni.getHardwareAddress() : null;
 			final InetAddress mcast = InetAddress.getByName(KNXnetIPRouting.DEFAULT_MULTICAST);
 			final DeviceDIB device = new DeviceDIB(deviceName, 0, 0, KNXMediumSettings.MEDIUM_KNXIP, deviceAddress,
-					new byte[6], mcast, mac != null ? mac : new byte[6]);
+					SerialNumber.Zero, mcast, mac != null ? mac : new byte[6]);
 			final ServiceFamiliesDIB svcFamilies = new ServiceFamiliesDIB(new int[] { ServiceFamiliesDIB.CORE },
 					new int[] { 1 });
 
@@ -188,11 +188,10 @@ public class PushButtonDeviceWithDiscovery extends KnxDeviceServiceLogic
 		final StateDP pushButton = new StateDP(dpAddress, deviceName, 0, DPTXlatorBoolean.DPT_SWITCH.getID());
 		logic.getDatapointModel().add(pushButton);
 
-		final BaseKnxDevice device = new BaseKnxDevice(deviceName, logic);
-
-		// Create the KNX IP network link on which KNX messages are received from, and sent on
-		try (DeviceRouting routing = new DeviceRouting();
-		       KNXNetworkLink link = new KNXNetworkLinkIP(2, routing, new KnxIPSettings(deviceAddress)) {}) {
+		// Create device and the KNX IP network link on which KNX messages are received from, and sent on
+		try (var device = new BaseKnxDevice(deviceName, logic);
+				var routing = new DeviceRouting();
+				var link = new KNXNetworkLinkIP(2, routing, new KnxIPSettings(deviceAddress)) {}) {
 			device.setDeviceLink(link);
 
 			// That's it. From here on, our KNX device provides KNXnet/IP discovery & description, and KNX process

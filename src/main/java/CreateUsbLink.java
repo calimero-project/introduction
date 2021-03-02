@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2016, 2018 B. Malinowsky
+    Copyright (c) 2016, 2021 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ public class CreateUsbLink
 
 		// Create the USB-based link. The network link uses the KNX USB communication protocol. The second argument
 		// indicates that the KNX installation uses twisted-pair (TP) medium, with TP1 being most common.
-		try (KNXNetworkLink knxLink = new KNXNetworkLinkUsb(device, TPSettings.TP1)) {
+		try (KNXNetworkLink knxLink = new KNXNetworkLinkUsb(device, new TPSettings())) {
 			System.out.println("Connection established using KNX USB device " + knxLink.getName());
 			System.out.println("Link status: connected=" + knxLink.isOpen());
 		}

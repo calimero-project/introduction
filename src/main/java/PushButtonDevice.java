@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2015, 2018 B. Malinowsky
+    Copyright (c) 2015, 2021 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -45,7 +45,6 @@ import tuwien.auto.calimero.device.BaseKnxDevice;
 import tuwien.auto.calimero.device.KnxDeviceServiceLogic;
 import tuwien.auto.calimero.dptxlator.DPTXlator;
 import tuwien.auto.calimero.dptxlator.DPTXlatorBoolean;
-import tuwien.auto.calimero.link.KNXNetworkLink;
 import tuwien.auto.calimero.link.KNXNetworkLinkIP;
 import tuwien.auto.calimero.link.medium.KnxIPSettings;
 
@@ -102,12 +101,11 @@ public class PushButtonDevice extends KnxDeviceServiceLogic
 		final StateDP pushButton = new StateDP(dpAddress, deviceName, 0, DPTXlatorBoolean.DPT_SWITCH.getID());
 		logic.getDatapointModel().add(pushButton);
 
-		final BaseKnxDevice device = new BaseKnxDevice(deviceName, logic);
-
-		// Create the network link on which KNX messages are received from, and sent on
+		// Create the device and the network link on which KNX messages are received from, and sent on
 		// We create a KNX IP link here (hence, it will only work on a KNX IP network!)
-		try (KNXNetworkLink link = KNXNetworkLinkIP.newRoutingLink((NetworkInterface) null, null,
-				new KnxIPSettings(deviceAddress))) {
+		try (var device = new BaseKnxDevice(deviceName, logic);
+				var link = KNXNetworkLinkIP.newRoutingLink((NetworkInterface) null, null,
+						new KnxIPSettings(deviceAddress))) {
 			device.setDeviceLink(link);
 
 			// That's it. From here on, our KNX device provides KNX process communication services for our datapoint.
