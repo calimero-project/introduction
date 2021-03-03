@@ -21,44 +21,40 @@ import java.net.InetSocketAddress;
 
 import tuwien.auto.calimero.KNXException;
 import tuwien.auto.calimero.knxnetip.KNXnetIPConnection;
-import tuwien.auto.calimero.link.KNXNetworkLink;
 import tuwien.auto.calimero.link.KNXNetworkLinkIP;
 import tuwien.auto.calimero.link.medium.TPSettings;
 
 /**
  * This example shows how to establish a client tunneling link to a KNXnet/IP server. Minimum requirements are Calimero
- * version &ge; 2.4 and Java SE 8 compact1 profile.
+ * version 2.5 and Java SE 11 (java.base).
  * <p>
  * You can safely run this example, the (established) connection is closed directly afterwards. No KNX messages are sent
  * to the KNX network.
- *
- * @author B. Malinowsky
  */
-public class CreateTunnelingLink
-{
+public class CreateTunnelingLink {
 	/**
-	 * Local endpoint, replace the IP address with your actual address. The local socket address is important for
-	 * multi-homed clients (several network interfaces), or if the address via InetAddress.getLocalHost is not useful.
+	 * Local endpoint, The local socket address is important for
+	 * multi-homed clients (several network interfaces), or if the default route is not useful.
 	 */
-	private static final InetSocketAddress local = new InetSocketAddress("192.168.1.10", 0);
+	private static final InetSocketAddress local = new InetSocketAddress(0);
 
 	/**
 	 * Specifies the KNXnet/IP server to access the KNX network, insert your server's actual host name or IP address,
-	 * e.g., "192.168.1.20". The default port is where most servers listen on for new connection requests.
+	 * e.g., "192.168.1.20". The default port is where most servers listen for new connection requests.
 	 */
 	private static final InetSocketAddress server = new InetSocketAddress("myKnxServer.myHome",
 			KNXnetIPConnection.DEFAULT_PORT);
 
-	public static void main(final String[] args)
-	{
-		System.out.println("This example establishes a tunneling connection to the KNXnet/IP server " + server);
+	public static void main(final String[] args) {
+		System.out.println("Establish a tunneling connection to the KNXnet/IP server " + server);
 
-		// A KNX tunneling link supports NAT (Network Address Translation) if required.
-		// We also indicate that the KNX installation uses twisted-pair (TP) medium, with TP1 being the most common.
-		// KNXNetworkLink is the base interface implemented by all supported Calimero links to a KNX network.
-		try (KNXNetworkLink knxLink = KNXNetworkLinkIP.newTunnelingLink(local, server, false, new TPSettings())) {
+		// KNXNetworkLink is the base interface of a Calimero link to a KNX network. Here, we create an IP-based link,
+		// which supports NAT (Network Address Translation) if required.
+		// We also indicate that the KNX installation uses twisted-pair (TP1) medium.
+		try (var knxLink = KNXNetworkLinkIP.newTunnelingLink(local, server, false, new TPSettings())) {
+
 			System.out.println("Connection established to server " + knxLink.getName());
-			System.out.println("Close connection again");
+
 		}
 		catch (KNXException | InterruptedException e) {
 			// KNXException: all Calimero-specific checked exceptions are subtypes of KNXException

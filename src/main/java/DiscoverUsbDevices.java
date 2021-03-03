@@ -31,8 +31,8 @@ import tuwien.auto.calimero.serial.usb.UsbConnection;
 
 /**
  * This example lists all found KNX USB and USB virtual serial devices. Only devices for KNX communication are listed
- * (if Calimero is able to identify them as such). Minimum requirements are Calimero version &ge; 2.4 and Java SE 8
- * compact1 profile.
+ * (if Calimero is able to identify them as such). Minimum requirements are Calimero version 2.5 and Java SE 11
+ * (java.base).
  * <p>
  * You can safely run this example, no KNX messages are sent to the KNX network.
  *

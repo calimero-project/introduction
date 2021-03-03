@@ -24,7 +24,7 @@ import tuwien.auto.calimero.link.medium.TPSettings;
 
 /**
  * This example shows how to establish a client network link ({@link KNXNetworkLink}) to a KNX TP1 network using a KNX
- * USB device. Minimum requirements are Calimero version &ge; 2.4 and Java SE 8 compact1 profile.
+ * USB device. Minimum requirements are Calimero version 2.5 and Java SE 11 (java.base).
  * <p>
  * You can safely run this example; the (established) connection is closed directly afterwards. No KNX messages are sent
  * to the KNX network.
