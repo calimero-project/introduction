@@ -1,17 +1,7 @@
 Introduction to Calimero
 ========================
 
-This repository contains additional documentation for Calimero and code examples.
-
-### Examples for Calimero 2.3 (or earlier)
-
-* [Create a KNX link (using default settings)](examples/CreateKnxLink.java)
-* [Create a KNX link (with more options)](examples/CreateKnxLink2.java)
-* [Process communication (read/write datapoints)](examples/ProcessCommunication.java)
-* [Use logging output](examples/Logging.java)
-* [KNX address converter](examples/KnxAddressConverter.java)
-
-### Examples for Calimero version 2.4 (requires Java 8)
+This repository contains additional documentation for Calimero and code examples for Calimero version 2.4 (requires Java 8).
 
 All examples can be built (not executed) using Gradle (`./gradlew build`)
 
@@ -26,14 +16,6 @@ All examples can be built (not executed) using Gradle (`./gradlew build`)
 * [Network state buffering](src/main/java/NetworkStateBuffering.java)
 * [KNX push-button device](src/main/java/PushButtonDevice.java)
 * [KNX IP push-button device supporting discovery & self description](src/main/java/PushButtonDeviceWithDiscovery.java)
-
-### Examples for Calimero version 2.5 snapshots (requires Java 11)
-
-Build examples using `./gradlew :2.5:build`, run with `./gradlew :2.5:run`
-
-* [KNX IP Secure routing network link](2.5/src/main/java/KnxipSecure.java)
-* [ETS keyring viewer](2.5/src/main/java/KeyringViewer.java), run it with Gradle using
-	`./gradlew :2.5:run -DmainClass=KeyringViewer --args="--pwd pwd '/path/to/keyring.knxkeys'"`	
 
 #### Guide for the KNX push-button device example
 
@@ -86,8 +68,3 @@ Build examples using `./gradlew :2.5:build`, run with `./gradlew :2.5:run`
 		MAC address f4:5c:89:8a:f4:9b
 		S/N 0x000000000000
 		Supported services: Core (v1)
-
-
-### Java ME Embedded 8 Example
-
-* [Java ME Embedded 8 Midlet](examples/midlet/)

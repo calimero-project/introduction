@@ -1,6 +1,0 @@
-MIDlet-Jar-URL: calimero-midlet.jar
-MIDlet-Name: calimero-midlet
-MIDlet-Vendor: Calimero Project
-MIDlet-Version: 1.0.0
-MicroEdition-Configuration: CLDC-1.8
-MicroEdition-Profile: MEEP-8.0
