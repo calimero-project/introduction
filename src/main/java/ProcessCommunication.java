@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2013, 2017 B. Malinowsky
+    Copyright (c) 2013 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,10 +17,8 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-import java.net.InetSocketAddress;
-
 import tuwien.auto.calimero.GroupAddress;
-import tuwien.auto.calimero.KNXException;
+import tuwien.auto.calimero.exception.KNXException;
 import tuwien.auto.calimero.link.KNXNetworkLink;
 import tuwien.auto.calimero.link.KNXNetworkLinkIP;
 import tuwien.auto.calimero.link.medium.TPSettings;
@@ -28,34 +26,63 @@ import tuwien.auto.calimero.process.ProcessCommunicator;
 import tuwien.auto.calimero.process.ProcessCommunicatorImpl;
 
 /**
- * Example of Calimero process communication, we read (and write) a boolean datapoint in the KNX network. By default,
- * this example will not change any datapoint value in the network.
+ * Example code showing how to use KNX process communication in Calimero. Process communication lets
+ * you query and set data points in the KNX network, using a group data point address and the data
+ * type of that data point.
+ * 
+ * @author B. Malinowsky
  */
 public class ProcessCommunication
 {
-	// Address of your KNXnet/IP server. Replace the IP host or address as necessary.
-	private static final String remoteHost = "192.168.10.10";
+	/**
+	 * Address of your KNXnet/IP server. Replace the IP address as necessary.
+	 */
+	private static final String remoteHost = "myKnxServer.myHome.com";
 
-	// We will read a boolean from the KNX datapoint with this group address, replace the address as necessary.
-	// Make sure this datapoint exists, otherwise you will get a read timeout!
-	private static final String group = "1/0/2";
+	/**
+	 * We will read a boolean from this KNX datapoint group address, replace the address string with
+	 * one of yours. Make sure this datapoint exists, otherwise you will get a read timeout!
+	 */
+	private static final String group = "1/1/1";
 
+	/**
+	 * @param args
+	 */
 	public static void main(final String[] args)
 	{
-		final InetSocketAddress remote = new InetSocketAddress(remoteHost, 3671);
-		// Create our network link, and pass it to a process communicator
-		try (KNXNetworkLink knxLink = KNXNetworkLinkIP.newTunnelingLink(null, remote, false, TPSettings.TP1);
-				ProcessCommunicator pc = new ProcessCommunicatorImpl(knxLink)) {
+		KNXNetworkLink knxLink = null;
+		ProcessCommunicator pc = null;
+		try {
+			// Create our network link. See other constructors if this one assumes too many
+			// default settings.
+			knxLink = new KNXNetworkLinkIP(remoteHost, TPSettings.TP1);
 
-			System.out.println("read boolean value from datapoint " + group);
+			// create a process communicator using that network link
+			pc = new ProcessCommunicatorImpl(knxLink);
+
+			System.out.println("read the group value from datapoint " + group);
+			// this is a blocking method to read a boolean from a KNX datapoint
 			final boolean value = pc.readBool(new GroupAddress(group));
-			System.out.println("datapoint " + group + " value = " + value);
+			System.out.println("value read from datapoint " + group + ": " + value);
 
-			// Uncomment the next line, if you want to write back the same value to the KNX network
+			// this would write to the KNX datapoint, if you want to write back the same value we
+			// just read, uncomment the next line
 			// pc.write(group, value);
+
 		}
-		catch (KNXException | InterruptedException e) {
-			System.out.println("Error accessing KNX datapoint: " + e.getMessage());
+		catch (final KNXException e) {
+			System.out.println("Error reading KNX datapoint: " + e.getMessage());
+		}
+		catch (final InterruptedException e) {
+			System.out.println("Interrupted: " + e.getMessage());
+		}
+		finally {
+			// we don't need the process communicator anymore, detach it from the link
+			if (pc != null)
+				pc.detach();
+			// close the KNX link
+			if (knxLink != null)
+				knxLink.close();
 		}
 	}
 }
