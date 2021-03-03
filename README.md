@@ -56,7 +56,5 @@ All examples require Java 11 and can be built using Gradle (`./gradlew build`). 
 
 ### Archived examples
 
-* Examples for Calimero version 2.4 (requires Java 8) can be found on the [release/2.4 branch](https://github.com/calimero-project/introduction/tree/release/2.4)
-* Examples for Calimero 2.3 (or earlier) can be found here
-* Java ME Embedded 8 Midlet example can be found here
-
+* Examples for Calimero v2.4 (requires Java 8) can be found on the [release/2.4 branch](https://github.com/calimero-project/introduction/tree/release/2.4)
+* Examples for Calimero v2.3 (or earlier) can be found on the [release/2.3 branch](https://github.com/calimero-project/introduction/tree/release/2.3)
