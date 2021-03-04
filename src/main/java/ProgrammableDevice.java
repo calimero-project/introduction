@@ -90,7 +90,7 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 	private static final String networkInterface = "eth0";
 
 	// Set true to adjust device identication for programming and activate programming mode, false otherwise
-	private static boolean prepareForProgramming = true;
+	private static final boolean prepareForProgramming = true;
 
 	// The initial KNX device address of our device. A device's individual address is mainly used for device management
 	private static final IndividualAddress deviceAddress = prepareForProgramming

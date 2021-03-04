@@ -43,6 +43,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.NetworkInterface;
 import java.time.LocalTime;
+import java.util.Map;
 
 import tuwien.auto.calimero.GroupAddress;
 import tuwien.auto.calimero.IndividualAddress;
@@ -65,6 +66,7 @@ import tuwien.auto.calimero.knxnetip.servicetype.SearchResponse;
 import tuwien.auto.calimero.knxnetip.util.DeviceDIB;
 import tuwien.auto.calimero.knxnetip.util.HPAI;
 import tuwien.auto.calimero.knxnetip.util.ServiceFamiliesDIB;
+import tuwien.auto.calimero.knxnetip.util.ServiceFamiliesDIB.ServiceFamily;
 import tuwien.auto.calimero.link.KNXNetworkLinkIP;
 import tuwien.auto.calimero.link.medium.KNXMediumSettings;
 import tuwien.auto.calimero.link.medium.KnxIPSettings;
@@ -122,7 +124,7 @@ public class PushButtonDeviceWithDiscovery extends KnxDeviceServiceLogic
 	{
 		DeviceRouting() throws KNXException
 		{
-			super(null, null);
+			super(null, DefaultMulticast);
 		}
 
 		@Override
@@ -148,8 +150,7 @@ public class PushButtonDeviceWithDiscovery extends KnxDeviceServiceLogic
 			final InetAddress mcast = InetAddress.getByName(KNXnetIPRouting.DEFAULT_MULTICAST);
 			final DeviceDIB device = new DeviceDIB(deviceName, 0, 0, KNXMediumSettings.MEDIUM_KNXIP, deviceAddress,
 					SerialNumber.Zero, mcast, mac != null ? mac : new byte[6]);
-			final ServiceFamiliesDIB svcFamilies = new ServiceFamiliesDIB(new int[] { ServiceFamiliesDIB.CORE },
-					new int[] { 1 });
+			final ServiceFamiliesDIB svcFamilies = new ServiceFamiliesDIB(Map.of(ServiceFamily.Core, 1));
 
 			final byte[] buf;
 			if (svc == SEARCH_REQ) {

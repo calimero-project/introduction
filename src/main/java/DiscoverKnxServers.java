@@ -17,7 +17,9 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-import tuwien.auto.calimero.KNXException;
+import java.time.Duration;
+import java.util.concurrent.ExecutionException;
+
 import tuwien.auto.calimero.knxnetip.Discoverer;
 
 /**
@@ -25,13 +27,9 @@ import tuwien.auto.calimero.knxnetip.Discoverer;
  * version 2.5 and Java SE 11 (java.base).
  * <p>
  * You can safely run this example, no KNX messages are sent to the KNX network.
- *
- * @author B. Malinowsky
  */
-public class DiscoverKnxServers
-{
-	public static void main(final String[] args)
-	{
+public class DiscoverKnxServers {
+	public static void main(final String[] args) {
 		System.out.println("This example discovers all active KNXnet/IP servers in your IP network");
 
 		try {
@@ -40,18 +38,13 @@ public class DiscoverKnxServers
 			// request multicast responses (as opposed to unicast responses) from discovered servers
 			final boolean requestMulticastResponse = true;
 
-			final Discoverer discoverer = new Discoverer(null, 0, useNAT, requestMulticastResponse);
-			discoverer.startSearch(3, true);
-
-			// print out responding servers
-			discoverer.getSearchResponses().forEach(r -> System.out.format("%s %s <=> %s%n",
+			final var discoverer = new Discoverer(null, 0, useNAT, requestMulticastResponse);
+			discoverer.timeout(Duration.ofSeconds(3)).search().get().forEach(r -> System.out.format("%s %s <=> %s%n",
 					r.getNetworkInterface().getName(),
 					r.localEndpoint(),
 					r.getResponse().toString().replace(", ", "\n\t")));
 		}
-		catch (KNXException | InterruptedException e) {
-			// KNXException: all Calimero-specific checked exceptions are subtypes of KNXException
-			// InterruptedException: longer tasks that might block are interruptible, e.g., server search.
+		catch (InterruptedException | ExecutionException e) {
 			System.out.println("Error during KNXnet/IP discovery: " + e);
 		}
 	}

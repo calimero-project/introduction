@@ -43,20 +43,17 @@ import tuwien.auto.calimero.process.ProcessListener;
  *
  * @author B. Malinowsky
  */
-public class GroupMonitor implements ProcessListener
-{
+public class GroupMonitor implements ProcessListener {
 	/**
 	 * Address of your KNXnet/IP server. Replace the host or IP address as necessary.
 	 */
 	private static final String remoteHost = "192.168.10.10";
 
-	public static void main(final String[] args)
-	{
+	public static void main(final String[] args) {
 		new GroupMonitor().run();
 	}
 
-	public void run()
-	{
+	public void run() {
 		final InetSocketAddress remote = new InetSocketAddress(remoteHost, 3671);
 		try (KNXNetworkLink knxLink = KNXNetworkLinkIP.newTunnelingLink(null, remote, false, new TPSettings());
 		     ProcessCommunicator pc = new ProcessCommunicatorImpl(knxLink)) {
@@ -83,8 +80,7 @@ public class GroupMonitor implements ProcessListener
 
 	// Called on every group notification issued by a datapoint on the KNX network. It prints the service primitive,
 	// KNX source and destination address, and Application Service Data Unit (ASDU) to System.out.
-	private static void print(final String svc, final ProcessEvent e)
-	{
+	private static void print(final String svc, final ProcessEvent e) {
 		try {
 			System.out.println(LocalTime.now() + " " + e.getSourceAddr() + "->" + e.getDestination() + " " + svc
 					+ ": " + DataUnitBuilder.toHex(e.getASDU(), ""));
