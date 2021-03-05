@@ -34,42 +34,20 @@
     version.
 */
 
-import static tuwien.auto.calimero.knxnetip.servicetype.KNXnetIPHeader.DESCRIPTION_REQ;
-import static tuwien.auto.calimero.knxnetip.servicetype.KNXnetIPHeader.SEARCH_REQ;
-
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.MulticastSocket;
 import java.net.NetworkInterface;
-import java.net.SocketException;
 import java.nio.file.Path;
-import java.util.Map;
 
 import tuwien.auto.calimero.DataUnitBuilder;
 import tuwien.auto.calimero.DeviceDescriptor.DD0;
 import tuwien.auto.calimero.IndividualAddress;
 import tuwien.auto.calimero.KNXException;
-import tuwien.auto.calimero.KNXFormatException;
 import tuwien.auto.calimero.SerialNumber;
 import tuwien.auto.calimero.datapoint.Datapoint;
 import tuwien.auto.calimero.device.BaseKnxDevice;
 import tuwien.auto.calimero.device.KnxDeviceServiceLogic;
 import tuwien.auto.calimero.dptxlator.DPTXlator;
-import tuwien.auto.calimero.knxnetip.KNXnetIPRouting;
-import tuwien.auto.calimero.knxnetip.servicetype.DescriptionRequest;
-import tuwien.auto.calimero.knxnetip.servicetype.DescriptionResponse;
-import tuwien.auto.calimero.knxnetip.servicetype.KNXnetIPHeader;
-import tuwien.auto.calimero.knxnetip.servicetype.PacketHelper;
-import tuwien.auto.calimero.knxnetip.servicetype.SearchRequest;
-import tuwien.auto.calimero.knxnetip.servicetype.SearchResponse;
-import tuwien.auto.calimero.knxnetip.util.DeviceDIB;
-import tuwien.auto.calimero.knxnetip.util.HPAI;
-import tuwien.auto.calimero.knxnetip.util.ServiceFamiliesDIB;
-import tuwien.auto.calimero.knxnetip.util.ServiceFamiliesDIB.ServiceFamily;
 import tuwien.auto.calimero.link.KNXNetworkLinkIP;
-import tuwien.auto.calimero.link.medium.KNXMediumSettings;
 import tuwien.auto.calimero.link.medium.KnxIPSettings;
 
 /**
@@ -113,8 +91,8 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 
 		final var ipSettings = new KnxIPSettings(deviceAddress);
 		try (var device = new BaseKnxDevice(deviceName, logic, iosResource.toUri(), new char[0]);
-			var routing = new DeviceRouting(ipSettings);
-			var link = new KNXNetworkLinkIP(2, routing, ipSettings) {}) {
+				var link = KNXNetworkLinkIP.newRoutingLink(NetworkInterface.getByName(networkInterface),
+						KNXNetworkLinkIP.DefaultMulticast, ipSettings)) {
 
 			if (prepareForProgramming) {
 				// prepare identification usually required for ETS download
@@ -144,7 +122,6 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 		catch (final KNXException e) {
 			System.err.println("Initializing link of " + deviceName + " failed: " + e.getMessage());
 		}
-		catch (final InterruptedException e) {}
 		finally {
 			System.out.println(deviceName + " has left the building.");
 		}
@@ -155,62 +132,4 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 
 	@Override
 	public DPTXlator requestDatapointValue(final Datapoint ofDp) throws KNXException { return null; }
-
-
-	// We override the KNXnet/IP routing implementation to filter and respond to KNXnet/IP search/description requests
-	private static class DeviceRouting extends KNXnetIPRouting {
-		private final KnxIPSettings ipSettings;
-
-		// TODO how to init secure routing?
-		DeviceRouting(final KnxIPSettings ipSettings) throws KNXException, SocketException {
-			super(KNXnetIPRouting.DefaultMulticast);
-			this.ipSettings = ipSettings;
-			init(NetworkInterface.getByName(networkInterface), false, true);
-		}
-
-		@Override
-		protected boolean handleServiceType(final KNXnetIPHeader h, final byte[] data, final int offset,
-			final InetAddress src, final int port) throws KNXFormatException, IOException
-		{
-			final int svc = h.getServiceType();
-			if (svc != SEARCH_REQ && svc != DESCRIPTION_REQ)
-				return super.handleServiceType(h, data, offset, src, port);
-			if (!supportedVersion(h))
-				return true;
-			final HPAI endpoint = svc == SEARCH_REQ ? new SearchRequest(data, offset).getEndpoint()
-					: new DescriptionRequest(data, offset).getEndpoint();
-			if (endpoint.getHostProtocol() != HPAI.IPV4_UDP)
-				return true;
-
-			// prepare the info we want to return for search/description responses
-			final var ni = ((MulticastSocket) socket).getNetworkInterface();
-			final byte[] mac = ni != null ? ni.getHardwareAddress() : null;
-
-			final var sno = SerialNumber.Zero;
-			final DeviceDIB device = new DeviceDIB(deviceName, 0, 0, KNXMediumSettings.MEDIUM_KNXIP,
-					ipSettings.getDeviceAddress(), sno, KNXnetIPRouting.DefaultMulticast,
-					mac != null ? mac : new byte[6]);
-			final var svcFamilies = new ServiceFamiliesDIB(Map.of(ServiceFamily.Core, 1));
-
-			final byte[] buf;
-			if (svc == SEARCH_REQ) {
-				final HPAI ctrlEndpoint = new HPAI(InetAddress.getLocalHost(), ctrlEndpt.getPort());
-				buf = PacketHelper.toPacket(new SearchResponse(ctrlEndpoint, device, svcFamilies));
-			}
-			else
-				buf = PacketHelper.toPacket(new DescriptionResponse(device, svcFamilies));
-
-			socket.send(new DatagramPacket(buf, buf.length, createResponseAddress(endpoint, src, port)));
-			return true;
-		}
-
-		private InetSocketAddress createResponseAddress(final HPAI endpoint, final InetAddress senderHost,
-			final int senderPort)
-		{
-			// NAT: if the data EP is incomplete or left empty, we fall back to the IP address and port of the sender.
-			if (endpoint.getAddress().isAnyLocalAddress() || endpoint.getPort() == 0)
-				return new InetSocketAddress(senderHost, senderPort);
-			return new InetSocketAddress(endpoint.getAddress(), endpoint.getPort());
-		}
-	}
 }

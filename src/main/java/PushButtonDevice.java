@@ -45,7 +45,6 @@ import tuwien.auto.calimero.device.BaseKnxDevice;
 import tuwien.auto.calimero.device.KnxDeviceServiceLogic;
 import tuwien.auto.calimero.dptxlator.DPTXlator;
 import tuwien.auto.calimero.dptxlator.DPTXlatorBoolean;
-import tuwien.auto.calimero.knxnetip.KNXnetIPRouting;
 import tuwien.auto.calimero.link.KNXNetworkLinkIP;
 import tuwien.auto.calimero.link.medium.KnxIPSettings;
 
@@ -105,7 +104,7 @@ public class PushButtonDevice extends KnxDeviceServiceLogic
 		// Create the device and the network link on which KNX messages are received from, and sent on
 		// We create a KNX IP link here (hence, it will only work on a KNX IP network!)
 		try (var device = new BaseKnxDevice(deviceName, logic);
-				var link = KNXNetworkLinkIP.newRoutingLink((NetworkInterface) null, KNXnetIPRouting.DefaultMulticast,
+				var link = KNXNetworkLinkIP.newRoutingLink((NetworkInterface) null, KNXNetworkLinkIP.DefaultMulticast,
 						new KnxIPSettings(deviceAddress))) {
 			device.setDeviceLink(link);
 
