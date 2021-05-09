@@ -37,7 +37,7 @@
 import tuwien.auto.calimero.DataUnitBuilder;
 import tuwien.auto.calimero.KNXException;
 import tuwien.auto.calimero.SerialNumber;
-import tuwien.auto.calimero.baos.Baos;
+import tuwien.auto.calimero.baos.BaosLinkAdapter;
 import tuwien.auto.calimero.baos.BaosService;
 import tuwien.auto.calimero.baos.BaosService.ErrorCode;
 import tuwien.auto.calimero.baos.BaosService.Item;
@@ -60,10 +60,10 @@ public class BaosCommunication {
 		try (final var link = new KNXNetworkLinkUsb("weinzierl", new TPSettings())) {
 
 			// create an adapter which puts a BAOS capable device into BAOS mode
-			final var baos = Baos.asBaosLink(link);
+			final var baosLink = BaosLinkAdapter.asBaosLink(link);
 
 			// add a listener where we register for BAOS events happening on our link
-			baos.addLinkListener(new NetworkLinkListener() {
+			baosLink.addLinkListener(new NetworkLinkListener() {
 				@LinkEvent
 				void baosEvent(final BaosService svc) {
 					if (svc.error() != ErrorCode.NoError)
@@ -85,13 +85,13 @@ public class BaosCommunication {
 			});
 
 			// query some BAOS server items
-			baos.send(BaosService.getServerItem(Property.SerialNumber, 1));
+			baosLink.send(BaosService.getServerItem(Property.SerialNumber, 1));
 			Thread.sleep(50);
-			baos.send(BaosService.getServerItem(Property.ConnectionState, 1));
+			baosLink.send(BaosService.getServerItem(Property.ConnectionState, 1));
 			Thread.sleep(500);
 
 			// detach the BAOS link, this will reset the underlying knx link back into link-layer mode
-			baos.detach();
+			baosLink.detach();
 		}
 	}
 }
