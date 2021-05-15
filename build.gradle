@@ -1,6 +1,8 @@
 // this gradle buildscript only builds the examples for calimero version >= 2.5
 plugins {
 	id "com.github.ben-manes.versions" version "0.38.0"
+	id 'maven-publish'
+	id 'signing'
 }
 
 apply plugin: 'java'
