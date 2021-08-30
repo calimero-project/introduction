@@ -18,6 +18,7 @@ All examples require Java 11 and can be built using Gradle (`./gradlew build`). 
 * [Network state buffering](src/main/java/NetworkStateBuffering.java)
 * [KNX push-button device](src/main/java/PushButtonDevice.java)
 * [KNX IP push-button device supporting discovery & self description](src/main/java/PushButtonDeviceWithDiscovery.java)
+* [LTE device for LTE-HEE runtime communication](src/main/java/LteDevice.java)
 * [ETS keyring viewer](src/main/java/KeyringViewer.java), run it with Gradle using
 	`./gradlew run -DmainClass=KeyringViewer --args="--pwd pwd '/path/to/keyring.knxkeys'"`
 
