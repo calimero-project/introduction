@@ -45,12 +45,12 @@ import tuwien.auto.calimero.LteHeeTag;
 import tuwien.auto.calimero.datapoint.Datapoint;
 import tuwien.auto.calimero.device.BaseKnxDevice;
 import tuwien.auto.calimero.device.KnxDeviceServiceLogic;
-import tuwien.auto.calimero.device.LteProcessEvent;
 import tuwien.auto.calimero.device.ServiceResult;
 import tuwien.auto.calimero.dptxlator.DPTXlator;
 import tuwien.auto.calimero.dptxlator.DPTXlator2ByteFloat;
 import tuwien.auto.calimero.link.KNXNetworkLinkIP;
 import tuwien.auto.calimero.link.medium.KnxIPSettings;
+import tuwien.auto.calimero.process.LteProcessEvent;
 import tuwien.auto.calimero.process.ProcessEvent;
 
 /**
