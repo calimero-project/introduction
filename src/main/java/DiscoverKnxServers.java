@@ -35,17 +35,14 @@ public class DiscoverKnxServers {
 		try {
 			// set true to be aware of Network Address Translation (NAT) during discovery
 			final boolean useNAT = false;
-			// request multicast responses (as opposed to unicast responses) from discovered servers
-			final boolean requestMulticastResponse = true;
-
-			final var discoverer = new Discoverer(null, 0, useNAT, requestMulticastResponse);
-			discoverer.timeout(Duration.ofSeconds(3)).search().get().forEach(r -> System.out.format("%s %s <=> %s%n",
-					r.getNetworkInterface().getName(),
-					r.localEndpoint(),
-					r.getResponse().toString().replace(", ", "\n\t")));
+			Discoverer.udp(useNAT).timeout(Duration.ofSeconds(3)).search().get().forEach(r ->
+					System.out.format("%s %s <=> %s%n",
+							r.getNetworkInterface().getName(),
+							r.localEndpoint(),
+							r.getResponse().toString().replace(", ", "\n\t")));
 		}
 		catch (InterruptedException | ExecutionException e) {
-			System.out.println("Error during KNXnet/IP discovery: " + e);
+			System.err.println("Error during KNXnet/IP discovery: " + e);
 		}
 	}
 }
