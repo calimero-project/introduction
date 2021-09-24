@@ -16,13 +16,10 @@ repositories {
 }
 
 // specify an example you want to run
-mainClassName = "DiscoverKnxServers"
+mainClassName = System.getProperty("mainClass") ?: "DiscoverKnxServers"
 
 // specify an example we want to run
 run {
-	ext.mainClass = System.properties.containsKey('mainClass') ? System.getProperty('mainClass') : mainClassName
-	mainClassName = ext.mainClass
-
 	systemProperties System.getProperties()
 }
 
