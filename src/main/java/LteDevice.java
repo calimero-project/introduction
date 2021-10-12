@@ -36,6 +36,7 @@
 
 import java.io.IOException;
 import java.net.NetworkInterface;
+import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 import tuwien.auto.calimero.DataUnitBuilder;
@@ -47,7 +48,6 @@ import tuwien.auto.calimero.device.BaseKnxDevice;
 import tuwien.auto.calimero.device.KnxDeviceServiceLogic;
 import tuwien.auto.calimero.device.ServiceResult;
 import tuwien.auto.calimero.dptxlator.DPTXlator;
-import tuwien.auto.calimero.dptxlator.DPTXlator2ByteFloat;
 import tuwien.auto.calimero.link.KNXNetworkLinkIP;
 import tuwien.auto.calimero.link.medium.KnxIPSettings;
 import tuwien.auto.calimero.process.LteProcessEvent;
@@ -93,21 +93,24 @@ public class LteDevice extends KnxDeviceServiceLogic {
 						KNXNetworkLinkIP.DefaultMulticast, ipSettings)) {
 
 			// initialize interface object with a property for LTE communication
+			// we implement the mandatory output of a room temperature sensor for this example
 			final var ios = device.getInterfaceObjectServer();
-			final int iot = 127; // interface object type
+			final int iot = 321; // interface object type
 			final int oi = 1; // object instance
-			final int pid = 150; // property ID
+			final int pid = 51; // property ID
 			ios.addInterfaceObject(iot);
 
-			final var xlator = new DPTXlator2ByteFloat(DPTXlator2ByteFloat.DPT_TEMPERATURE);
-			xlator.setValue(20.3);
-			ios.setProperty(iot, oi, pid, 1, 1, xlator.getData());
-
+			// set temperature as property value
+			final double tempRoom = 27.04; // degree Celsius
+			final int raw = (int) (tempRoom * 50);
+			final int status = 0;
+			final byte[] data = ByteBuffer.allocate(3).putShort((short) raw).put((byte) status).array();
+			ios.setProperty(iot, oi, pid, 1, 1, data);
 
 			device.setDeviceLink(link);
 			System.out.println(device + " is up");
 			// every 10 seconds, send group property info with the specified property
-			final var tag = LteHeeTag.geoTag(1, 1, 0);
+			final var tag = LteHeeTag.geoTag(1, 18, 1);
 			try {
 				while (true) {
 					Thread.sleep(10_000);
@@ -153,7 +156,8 @@ public class LteDevice extends KnxDeviceServiceLogic {
 			@Override
 			public void run() {
 				// TODO response addr and object instance might differ depending on property we look up
-				sendLteHee(GroupPropResponse, tag, iot, oi, pid);
+				final int responseOi = 1;
+				sendLteHee(GroupPropResponse, tag, iot, responseOi, pid);
 			}
 		};
 
