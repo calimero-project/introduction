@@ -35,6 +35,7 @@
 */
 
 import java.net.NetworkInterface;
+import java.time.LocalTime;
 
 import tuwien.auto.calimero.GroupAddress;
 import tuwien.auto.calimero.IndividualAddress;
@@ -69,8 +70,9 @@ public class PushButtonDevice extends KnxDeviceServiceLogic
 	// Initialize some constants for this example
 
 	// The name/ID of our KNX device. It can be arbitrarily assigned by the user application, e.g.,
-	// a human readable name, or some unique ID like "building:1/floor:1/room:3/switch:2".
-	private static final String deviceName = "push-button";
+	// a human readable name, or some unique ID.
+	// It is used for KNXnet/IP device discovery, and therefore, limited to a maximum of 29 ISO 8859-1 characters.
+	private static final String deviceName = "Push Button (KNX IP)";
 
 	// The KNX device address of our device.
 	// A device's individual address is mainly used for device management (it is not used to access the datapoint to
@@ -129,19 +131,19 @@ public class PushButtonDevice extends KnxDeviceServiceLogic
 		// This method is called wrt to a KNX process communication write indication service: update our datapoint value
 		// In our example of having only a single datapoint, we know it's the pushbutton state
 		state = ((DPTXlatorBoolean) update).getValueBoolean();
-		System.out.println(ofDp.getName() + " datapoint value got updated to \"" + update.getValue() + "\"");
+		System.out.println(LocalTime.now() + " " + ofDp.getName() + " switched \"" + update.getValue() + "\"");
 	}
 
 	@Override
 	public DPTXlator requestDatapointValue(final Datapoint ofDp) throws KNXException
 	{
-		// This method is called wrt a KNX process communication read request service: respond with our
+		// This method is called if we received a KNX process communication read request: respond with our
 		// current datapoint value representing the push-button state
 		final DPTXlatorBoolean t = new DPTXlatorBoolean(ofDp.getDPT());
 		// set our current button state, the translator will translate it accordingly
 		t.setValue(state);
 
-		System.out.println("Respond with \"" + t.getValue() + "\" to read-request for " + ofDp.getName());
+		System.out.println(LocalTime.now() + " Respond with \"" + t.getValue() + "\" to read-request for " + ofDp.getName());
 		return t;
 	}
 }
