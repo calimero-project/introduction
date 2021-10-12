@@ -36,6 +36,7 @@
 
 import java.io.IOException;
 import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
@@ -48,6 +49,7 @@ import tuwien.auto.calimero.device.BaseKnxDevice;
 import tuwien.auto.calimero.device.KnxDeviceServiceLogic;
 import tuwien.auto.calimero.device.ServiceResult;
 import tuwien.auto.calimero.dptxlator.DPTXlator;
+import tuwien.auto.calimero.link.KNXNetworkLink;
 import tuwien.auto.calimero.link.KNXNetworkLinkIP;
 import tuwien.auto.calimero.link.medium.KnxIPSettings;
 import tuwien.auto.calimero.process.LteProcessEvent;
@@ -61,66 +63,59 @@ import tuwien.auto.calimero.process.ProcessEvent;
  * This class can be run as Java program directly in a terminal, and terminated by thread interruption or entering an
  * arbitray character that is read by {@link System.in}.
  */
-public class LteDevice extends KnxDeviceServiceLogic {
+public class LteDevice extends KnxDeviceServiceLogic implements Runnable {
 	// The name/ID of our KNX device.
 	// Used for KNXnet/IP device discovery, and therefore, limited to a maximum of 29 ISO 8859-1 characters.
-	private static final String deviceName = "LTE Device (KNX IP)";
+	private final String deviceName = "LTE Device (KNX IP)";
 
 	// Name of the network interface to use for KNX IP Routing
-	private static final String networkInterface = "en0";
+	private final String networkInterface = "en0";
 
 	// The initial KNX device address of our device. A device's individual address is mainly used for device management
-	private static final IndividualAddress deviceAddress = new IndividualAddress(1, 2, 3);
+	private final IndividualAddress deviceAddress = new IndividualAddress(1, 2, 3);
 
-
-	private static final int GroupPropResponse = 0b1111101001;
-	private static final int GroupPropWrite = 0b1111101010;
-	private static final int GroupPropInfo = 0b1111101011;
+	// temperature sensor DP address information
+	private final LteHeeTag tag = LteHeeTag.geoTag(1, 18, 1);
+	private final int iot = 321; // interface object type of our LTE-HEE value
+	private final int oi = 1; // object instance of our our LTE-HEE value
+	private final int pid = 51; // property ID of our our LTE-HEE value
 
 
 	// Runs the LTE device
 	public static void main(final String[] args) throws KNXException, IOException {
-		// We need to do three things:
-		// 1) initialize the device logic (this class)
-		// 2) instantiate our KNX device
-		// 3) setup a network link using IP routing, so our device can talk to the KNX network
+		new LteDevice().run();
+	}
 
-		final var logic = new LteDevice();
+	@Override
+	public void run() {
+		// For setup, we need to do two things:
+		// 1) instantiate our KNX device
+		// 2) setup a network link so our device can talk to the KNX network, in our example we use IP routing
+		try (var device = new BaseKnxDevice(deviceName, this);
+			 var link = newLink()) {
 
-		final var ipSettings = new KnxIPSettings(deviceAddress);
-		try (var device = new BaseKnxDevice(deviceName, logic);
-				var link = KNXNetworkLinkIP.newRoutingLink(NetworkInterface.getByName(networkInterface),
-						KNXNetworkLinkIP.DefaultMulticast, ipSettings)) {
-
-			// initialize interface object with a property for LTE communication
-			// we implement the mandatory output of a room temperature sensor for this example
-			final var ios = device.getInterfaceObjectServer();
-			final int iot = 321; // interface object type
-			final int oi = 1; // object instance
-			final int pid = 51; // property ID
-			ios.addInterfaceObject(iot);
-
+			// initialize interface object we use for LTE communication
+			// for this example, we implement the mandatory output of a room temperature sensor
+			device.getInterfaceObjectServer().addInterfaceObject(iot);
 			// set temperature as property value
 			final double tempRoom = 27.04; // degree Celsius
-			final int raw = (int) (tempRoom * 50);
-			final int status = 0;
-			final byte[] data = ByteBuffer.allocate(3).putShort((short) raw).put((byte) status).array();
-			ios.setProperty(iot, oi, pid, 1, 1, data);
 
 			device.setDeviceLink(link);
 			System.out.println(device + " is up");
 			// every 10 seconds, send group property info with the specified property
-			final var tag = LteHeeTag.geoTag(1, 18, 1);
 			try {
 				while (true) {
+					sendRoomTempInfo(tempRoom);
 					Thread.sleep(10_000);
-					logic.sendLteHee(GroupPropInfo, tag, iot, oi, pid);
 				}
 			}
 			catch (final InterruptedException e) {}
 		}
 		catch (final KNXException e) {
 			System.err.println("Initializing link of " + deviceName + " failed: " + e.getMessage());
+		}
+		catch (final SocketException e) {
+			System.err.println("Network interface problem: " + e.getMessage());
 		}
 		finally {
 			System.out.println(deviceName + " has left the building.");
@@ -134,34 +129,52 @@ public class LteDevice extends KnxDeviceServiceLogic {
 		return super.groupReadRequest(e);
 	}
 
+
+	private static final int GroupPropResponse = 0b1111101001;
+	private static final int GroupPropWrite = 0b1111101010;
+	private static final int GroupPropInfo = 0b1111101011;
+
 	private ServiceResult<byte[]> lteGroupReadRequest(final LteProcessEvent lteEvent) {
 		final var tag = LteHeeTag.from(lteEvent.extFrameFormat() , lteEvent.getDestination());
 
 		final byte[] asdu = lteEvent.getASDU();
 		final int iot = ((asdu[0] & 0xff) << 8) | (asdu[1] & 0xff);
 		// object instance is not known by sender and has no meaning, should be always 0 (wildcard)
-		final int oi = asdu[2] & 0xff;
+		final int dummyOi = asdu[2] & 0xff;
 		final int pid = asdu[3] & 0xff;
 		if (pid == 0xff) {
 			final int companyCode = ((asdu[4] & 0xff) << 8) | (asdu[5] & 0xff);
 			final int privatePid = asdu[6] & 0xff;
-			System.out.println(tag + " IOT " + iot + " OI " + oi + " company " + companyCode + " PID " + privatePid + ": "
-					+ DataUnitBuilder.toHex(Arrays.copyOfRange(asdu, 7, asdu.length), ""));
+			System.out.println(tag + " IOT " + iot + " OI " + dummyOi + " company " + companyCode + " PID " + privatePid
+					+ ": " + DataUnitBuilder.toHex(Arrays.copyOfRange(asdu, 7, asdu.length), ""));
 		}
 		else
-			System.out.println(tag + " IOT " + iot + " OI " + oi + " PID " + pid + ": "
+			System.out.println(tag + " IOT " + iot + " OI " + dummyOi + " PID " + pid + ": "
 					+ DataUnitBuilder.toHex(Arrays.copyOfRange(asdu, 4, asdu.length), ""));
 
-		final var sr = new ServiceResult<byte[]>() {
+		final var roomTempResponse = new ServiceResult<byte[]>() {
 			@Override
 			public void run() {
 				// TODO response addr and object instance might differ depending on property we look up
-				final int responseOi = 1;
-				sendLteHee(GroupPropResponse, tag, iot, responseOi, pid);
+				sendLteHee(GroupPropResponse, tag, iot, oi, pid);
 			}
 		};
 
-		return sr;
+		return roomTempResponse;
+	}
+
+	private void sendRoomTempInfo(final double v) {
+		final int raw = (int) (v * 50);
+		final int status = 0;
+		final byte[] data = ByteBuffer.allocate(3).putShort((short) raw).put((byte) status).array();
+		device.getInterfaceObjectServer().setProperty(iot, oi, pid, 1, 1, data);
+		sendLteHee(GroupPropInfo, tag, iot, oi, pid);
+	}
+
+	private KNXNetworkLink newLink() throws SocketException, KNXException {
+		final var netif = NetworkInterface.getByName(networkInterface);
+		final var ipSettings = new KnxIPSettings(deviceAddress);
+		return KNXNetworkLinkIP.newRoutingLink(netif, KNXNetworkLinkIP.DefaultMulticast, ipSettings);
 	}
 
 	@Override
