@@ -59,7 +59,9 @@ public class KeyringViewer {
 
 		keyring.backbone().ifPresent(bb -> {
 			header("Backbone");
-			System.out.println(bb + (keyringPwd.length > 0 ? ", key " + decryptKey(bb.groupKey()) : ""));
+			final var keyInfo = bb.groupKey().filter(__ -> keyringPwd.length > 0).map(key -> ", key " + decryptKey(key))
+					.orElse("");
+			System.out.println(bb + keyInfo);
 		});
 
 		header("Devices");
