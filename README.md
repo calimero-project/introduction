@@ -1,9 +1,11 @@
 Introduction to Calimero
 ========================
 
-This repository contains additional documentation for Calimero and code examples.
+This repository contains additional documentation for Calimero and code examples using Java and Kotlin.
 
 All examples require Java 11 and can be built using Gradle (`./gradlew build`). A single example can be executed via Gradle by specifying the class like `./gradlew run -DmainClass=GroupMonitor`.
+
+For Kotlin, an example can be run via Gradle by appending "Kt" to the class name, e.g., for _DiscoverKnxServers_ this would be `./gradlew run -DmainClass=DiscoverKnxServersKt`
 
 * [Discover KNXnet/IP servers](src/main/java/DiscoverKnxServers.java)
 * [Discover KNX USB devices](src/main/java/DiscoverUsbDevices.java)

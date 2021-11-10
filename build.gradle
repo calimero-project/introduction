@@ -3,6 +3,7 @@ plugins {
 	id "com.github.ben-manes.versions" version "0.39.0"
 	id 'maven-publish'
 	id 'signing'
+	id 'org.jetbrains.kotlin.jvm' version '1.5.31'
 }
 
 apply plugin: 'java'
@@ -27,6 +28,11 @@ version = '2.5-rc2'
 
 sourceCompatibility = 11
 targetCompatibility = 11
+
+compileKotlin {
+    kotlinOptions.jvmTarget = '11'
+}
+
 
 [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 compileJava.options*.compilerArgs = [
