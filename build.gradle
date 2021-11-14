@@ -24,7 +24,7 @@ run {
 	systemProperties System.getProperties()
 }
 
-version = '2.5-rc2'
+version = '2.5'
 
 sourceCompatibility = 11
 targetCompatibility = 11
