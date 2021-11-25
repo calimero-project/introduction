@@ -6,7 +6,7 @@ import kotlin.jvm.Throws
 
 /**
  * This example shows how to establish a client network link ([KNXNetworkLink]) to a KNX TP1 network using a KNX
- * USB device. Minimum requirements are Calimero version 2.5.
+ * USB device. Minimum requirements are Calimero version 2.6-SNAPSHOT.
  *
  * You can safely run this example; the (established) connection is closed directly afterwards. No KNX messages are sent
  * to the KNX network.

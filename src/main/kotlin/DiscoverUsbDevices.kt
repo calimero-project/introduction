@@ -3,7 +3,7 @@ import javax.usb.UsbDevice
 
 /**
  * This example lists all found KNX USB and USB virtual serial devices. Only devices for KNX communication are listed
- * (if Calimero is able to identify them as such). Minimum requirements are Calimero version 2.5.
+ * (if Calimero is able to identify them as such). Minimum requirements are Calimero version 2.6-SNAPSHOT.
  *
  * You can safely run this example, no KNX messages are sent to the KNX network.
  */
