@@ -18,16 +18,16 @@ For Kotlin, an example can be run via Gradle by appending "Kt" to the class name
 * [KNX address converter](src/main/java/KnxAddressConverter.java), e.g., `./gradlew run -DmainClass=KnxAddressConverter --args="1/2/3"`
 * [DPT translation](src/main/java/DptTranslation.java)
 * [Network state buffering](src/main/java/NetworkStateBuffering.java)
-* [KNX push-button device](src/main/java/PushButtonDevice.java)
-* [KNX IP push-button device supporting discovery & self description](src/main/java/PushButtonDeviceWithDiscovery.java)
+* [KNX IP push-button device](src/main/java/PushButtonDevice.java)
 * [LTE device for LTE-HEE runtime communication](src/main/java/LteDevice.java)
 * [ETS keyring viewer](src/main/java/KeyringViewer.java), run it with Gradle using
 	`./gradlew run -DmainClass=KeyringViewer --args="--pwd pwd '/path/to/keyring.knxkeys'"`
+* [Basic programmable device](src/main/java/ProgrammableDevice.java)
 
 
 #### Guide for the KNX push-button device example
 
-- Run the example in your IDE, or command line using `./gradlew run -DmainClass=PushButtonDeviceWithDiscovery`
+- Run the example in your IDE, or command line using `./gradlew run -DmainClass=PushButtonDevice`
 
 - Use process communication to read/write the push button state, for example in the ETS group monitor. Or with the Calimero [tools](https://github.com/calimero-project/calimero-tools) group monitor in a second terminal (`./gradlew run --args "groupmon 224.0.23.12"`) and enter the following commands:
  
