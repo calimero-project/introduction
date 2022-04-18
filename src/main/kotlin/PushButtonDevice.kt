@@ -77,7 +77,7 @@ fun main() {
         }
     } catch (e: KNXException) {
         println("Running $deviceName failed: ${e.message}")
-    } catch (e: InterruptedException) {
+    } catch (_: InterruptedException) {
     } finally {
         println("$deviceName has left the building.")
     }
@@ -90,7 +90,7 @@ private class PushButtonDeviceLogic : KnxDeviceServiceLogic() {
 
     override fun updateDatapointValue(ofDp: Datapoint, update: DPTXlator) {
         // This method is called wrt to a KNX process communication write indication service: update our datapoint value
-        // In our example of having only a single datapoint, we know it's the pushbutton state
+        // In our example of having only a single datapoint, we know it's the push-button state
         state = (update as DPTXlatorBoolean).valueBoolean
         println("${LocalTime.now()} ${ofDp.name} switched \"${update.value}\"")
     }
