@@ -1,9 +1,9 @@
-import tuwien.auto.calimero.FrameEvent
-import tuwien.auto.calimero.KNXException
-import tuwien.auto.calimero.link.KNXNetworkMonitor
-import tuwien.auto.calimero.link.KNXNetworkMonitorTpuart
-import tuwien.auto.calimero.link.LinkListener
-import tuwien.auto.calimero.link.MonitorFrameEvent
+import io.calimero.FrameEvent
+import io.calimero.KNXException
+import io.calimero.link.KNXNetworkMonitor
+import io.calimero.link.KNXNetworkMonitorTpuart
+import io.calimero.link.LinkListener
+import io.calimero.link.MonitorFrameEvent
 
 /**
  * This example shows how to establish a client network monitor ([KNXNetworkMonitor]) to a KNX TP1 network using

@@ -1,6 +1,6 @@
-import tuwien.auto.calimero.link.KNXNetworkLink
-import tuwien.auto.calimero.link.KNXNetworkLinkUsb
-import tuwien.auto.calimero.link.medium.TPSettings
+import io.calimero.link.KNXNetworkLink
+import io.calimero.link.KNXNetworkLinkUsb
+import io.calimero.link.medium.TPSettings
 
 /**
  * This example shows how to establish a client network link ([KNXNetworkLink]) to a KNX TP1 network using a KNX

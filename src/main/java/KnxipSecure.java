@@ -23,12 +23,12 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.time.Duration;
 
-import tuwien.auto.calimero.DataUnitBuilder;
-import tuwien.auto.calimero.FrameEvent;
-import tuwien.auto.calimero.KNXException;
-import tuwien.auto.calimero.link.KNXNetworkLinkIP;
-import tuwien.auto.calimero.link.NetworkLinkListener;
-import tuwien.auto.calimero.link.medium.TPSettings;
+import io.calimero.DataUnitBuilder;
+import io.calimero.FrameEvent;
+import io.calimero.KNXException;
+import io.calimero.link.KNXNetworkLinkIP;
+import io.calimero.link.NetworkLinkListener;
+import io.calimero.link.medium.TPSettings;
 
 /**
  * This example shows how to establish a secure client routing link using KNX IP Secure. Minimum requirements are

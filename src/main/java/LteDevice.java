@@ -40,20 +40,20 @@ import java.net.SocketException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
-import tuwien.auto.calimero.DataUnitBuilder;
-import tuwien.auto.calimero.IndividualAddress;
-import tuwien.auto.calimero.KNXException;
-import tuwien.auto.calimero.LteHeeTag;
-import tuwien.auto.calimero.datapoint.Datapoint;
-import tuwien.auto.calimero.device.BaseKnxDevice;
-import tuwien.auto.calimero.device.KnxDeviceServiceLogic;
-import tuwien.auto.calimero.device.ServiceResult;
-import tuwien.auto.calimero.dptxlator.DPTXlator;
-import tuwien.auto.calimero.link.KNXNetworkLink;
-import tuwien.auto.calimero.link.KNXNetworkLinkIP;
-import tuwien.auto.calimero.link.medium.KnxIPSettings;
-import tuwien.auto.calimero.process.LteProcessEvent;
-import tuwien.auto.calimero.process.ProcessEvent;
+import io.calimero.DataUnitBuilder;
+import io.calimero.IndividualAddress;
+import io.calimero.KNXException;
+import io.calimero.LteHeeTag;
+import io.calimero.datapoint.Datapoint;
+import io.calimero.device.BaseKnxDevice;
+import io.calimero.device.KnxDeviceServiceLogic;
+import io.calimero.device.ServiceResult;
+import io.calimero.dptxlator.DPTXlator;
+import io.calimero.link.KNXNetworkLink;
+import io.calimero.link.KNXNetworkLinkIP;
+import io.calimero.link.medium.KnxIPSettings;
+import io.calimero.process.LteProcessEvent;
+import io.calimero.process.ProcessEvent;
 
 /**
  * An LTE device, for KNX LTE-HEE runtime communication over KNX IP.

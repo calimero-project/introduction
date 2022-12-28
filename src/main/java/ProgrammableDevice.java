@@ -38,17 +38,19 @@ import java.io.IOException;
 import java.net.NetworkInterface;
 import java.nio.file.Path;
 
-import tuwien.auto.calimero.DataUnitBuilder;
-import tuwien.auto.calimero.DeviceDescriptor.DD0;
-import tuwien.auto.calimero.IndividualAddress;
-import tuwien.auto.calimero.KNXException;
-import tuwien.auto.calimero.SerialNumber;
-import tuwien.auto.calimero.datapoint.Datapoint;
-import tuwien.auto.calimero.device.BaseKnxDevice;
-import tuwien.auto.calimero.device.KnxDeviceServiceLogic;
-import tuwien.auto.calimero.dptxlator.DPTXlator;
-import tuwien.auto.calimero.link.KNXNetworkLinkIP;
-import tuwien.auto.calimero.link.medium.KnxIPSettings;
+import io.calimero.DataUnitBuilder;
+import io.calimero.DeviceDescriptor.DD0;
+import io.calimero.IndividualAddress;
+import io.calimero.KNXException;
+import io.calimero.SerialNumber;
+import io.calimero.datapoint.Datapoint;
+import io.calimero.device.BaseKnxDevice;
+import io.calimero.device.KnxDeviceServiceLogic;
+import io.calimero.device.ios.SecurityObject;
+import io.calimero.device.ios.SecurityObject.Pid;
+import io.calimero.dptxlator.DPTXlator;
+import io.calimero.link.KNXNetworkLinkIP;
+import io.calimero.link.medium.KnxIPSettings;
 
 /**
  * A programmable device, using KNX IP to communicate with other KNX endpoints. This example extends

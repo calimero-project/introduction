@@ -34,18 +34,18 @@
     version.
 */
 
-import tuwien.auto.calimero.DataUnitBuilder;
-import tuwien.auto.calimero.KNXException;
-import tuwien.auto.calimero.SerialNumber;
-import tuwien.auto.calimero.baos.BaosLinkAdapter;
-import tuwien.auto.calimero.baos.BaosService;
-import tuwien.auto.calimero.baos.BaosService.ErrorCode;
-import tuwien.auto.calimero.baos.BaosService.Item;
-import tuwien.auto.calimero.baos.BaosService.Property;
-import tuwien.auto.calimero.link.KNXNetworkLinkUsb;
-import tuwien.auto.calimero.link.LinkEvent;
-import tuwien.auto.calimero.link.NetworkLinkListener;
-import tuwien.auto.calimero.link.medium.TPSettings;
+import io.calimero.DataUnitBuilder;
+import io.calimero.KNXException;
+import io.calimero.SerialNumber;
+import io.calimero.baos.BaosLinkAdapter;
+import io.calimero.baos.BaosService;
+import io.calimero.baos.BaosService.ErrorCode;
+import io.calimero.baos.BaosService.Item;
+import io.calimero.baos.BaosService.Property;
+import io.calimero.link.KNXNetworkLinkUsb;
+import io.calimero.link.LinkEvent;
+import io.calimero.link.NetworkLinkListener;
+import io.calimero.link.medium.TPSettings;
 
 /**
  * This example shows how to establish a BAOS client link using KNX USB. Minimum requirements are

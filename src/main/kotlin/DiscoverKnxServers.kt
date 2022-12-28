@@ -1,4 +1,4 @@
-import tuwien.auto.calimero.knxnetip.Discoverer
+import io.calimero.knxnetip.Discoverer
 import java.time.Duration
 import java.util.concurrent.ExecutionException
 

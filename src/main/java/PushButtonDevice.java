@@ -37,17 +37,17 @@
 import java.net.NetworkInterface;
 import java.time.LocalTime;
 
-import tuwien.auto.calimero.GroupAddress;
-import tuwien.auto.calimero.IndividualAddress;
-import tuwien.auto.calimero.KNXException;
-import tuwien.auto.calimero.datapoint.Datapoint;
-import tuwien.auto.calimero.datapoint.StateDP;
-import tuwien.auto.calimero.device.BaseKnxDevice;
-import tuwien.auto.calimero.device.KnxDeviceServiceLogic;
-import tuwien.auto.calimero.dptxlator.DPTXlator;
-import tuwien.auto.calimero.dptxlator.DPTXlatorBoolean;
-import tuwien.auto.calimero.link.KNXNetworkLinkIP;
-import tuwien.auto.calimero.link.medium.KnxIPSettings;
+import io.calimero.GroupAddress;
+import io.calimero.IndividualAddress;
+import io.calimero.KNXException;
+import io.calimero.datapoint.Datapoint;
+import io.calimero.datapoint.StateDP;
+import io.calimero.device.BaseKnxDevice;
+import io.calimero.device.KnxDeviceServiceLogic;
+import io.calimero.dptxlator.DPTXlator;
+import io.calimero.dptxlator.DPTXlatorBoolean;
+import io.calimero.link.KNXNetworkLinkIP;
+import io.calimero.link.medium.KnxIPSettings;
 
 /**
  * A KNX device that acts as 2-state push button (switch) in a KNX installation. This example extends the Calimero

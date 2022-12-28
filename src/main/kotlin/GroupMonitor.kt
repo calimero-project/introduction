@@ -1,10 +1,10 @@
-import tuwien.auto.calimero.DataUnitBuilder
-import tuwien.auto.calimero.DetachEvent
-import tuwien.auto.calimero.link.KNXNetworkLinkIP
-import tuwien.auto.calimero.link.medium.TPSettings
-import tuwien.auto.calimero.process.ProcessCommunicatorImpl
-import tuwien.auto.calimero.process.ProcessEvent
-import tuwien.auto.calimero.process.ProcessListener
+import io.calimero.DataUnitBuilder
+import io.calimero.DetachEvent
+import io.calimero.link.KNXNetworkLinkIP
+import io.calimero.link.medium.TPSettings
+import io.calimero.process.ProcessCommunicatorImpl
+import io.calimero.process.ProcessEvent
+import io.calimero.process.ProcessListener
 import java.net.InetSocketAddress
 import java.time.LocalTime
 

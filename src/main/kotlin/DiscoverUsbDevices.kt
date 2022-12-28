@@ -1,4 +1,4 @@
-import tuwien.auto.calimero.serial.usb.UsbConnection
+import io.calimero.serial.usb.UsbConnection
 import javax.usb.UsbDevice
 
 /**

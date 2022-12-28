@@ -19,8 +19,8 @@
 
 import java.util.Optional;
 
-import tuwien.auto.calimero.DataUnitBuilder;
-import tuwien.auto.calimero.secure.Keyring;
+import io.calimero.DataUnitBuilder;
+import io.calimero.secure.Keyring;
 
 /**
  * Prints the (decrypted) content of a keyring (*.knxkeys) resource. Minimum requirements are Calimero version &ge;

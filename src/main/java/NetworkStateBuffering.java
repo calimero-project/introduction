@@ -21,18 +21,18 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.UnknownHostException;
 
-import tuwien.auto.calimero.GroupAddress;
-import tuwien.auto.calimero.KNXException;
-import tuwien.auto.calimero.buffer.Configuration;
-import tuwien.auto.calimero.buffer.NetworkBuffer;
-import tuwien.auto.calimero.buffer.StateFilter;
-import tuwien.auto.calimero.datapoint.StateDP;
-import tuwien.auto.calimero.dptxlator.DPTXlator8BitUnsigned;
-import tuwien.auto.calimero.knxnetip.KNXnetIPRouting;
-import tuwien.auto.calimero.link.KNXNetworkLink;
-import tuwien.auto.calimero.link.KNXNetworkLinkIP;
-import tuwien.auto.calimero.link.medium.KnxIPSettings;
-import tuwien.auto.calimero.process.ProcessCommunicatorImpl;
+import io.calimero.GroupAddress;
+import io.calimero.KNXException;
+import io.calimero.buffer.Configuration;
+import io.calimero.buffer.NetworkBuffer;
+import io.calimero.buffer.StateFilter;
+import io.calimero.datapoint.StateDP;
+import io.calimero.dptxlator.DPTXlator8BitUnsigned;
+import io.calimero.knxnetip.KNXnetIPRouting;
+import io.calimero.link.KNXNetworkLink;
+import io.calimero.link.KNXNetworkLinkIP;
+import io.calimero.link.medium.KnxIPSettings;
+import io.calimero.process.ProcessCommunicatorImpl;
 
 /**
  * Example showing basic Calimero network buffering for state-based KNX datapoints and a polling task.

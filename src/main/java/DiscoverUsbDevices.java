@@ -27,7 +27,7 @@ import javax.usb.UsbDeviceDescriptor;
 import javax.usb.UsbDisconnectedException;
 import javax.usb.UsbException;
 
-import tuwien.auto.calimero.serial.usb.UsbConnection;
+import io.calimero.serial.usb.UsbConnection;
 
 /**
  * This example lists all found KNX USB and USB virtual serial devices. Only devices for KNX communication are listed

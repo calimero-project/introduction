@@ -20,7 +20,7 @@
 import java.time.Duration;
 import java.util.concurrent.ExecutionException;
 
-import tuwien.auto.calimero.knxnetip.Discoverer;
+import io.calimero.knxnetip.Discoverer;
 
 /**
  * This example shows how to discover active KNXnet/IP servers in an IP network. Minimum requirements are Calimero

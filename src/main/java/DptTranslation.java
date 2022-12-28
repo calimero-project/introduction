@@ -17,18 +17,18 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-import static tuwien.auto.calimero.dptxlator.DPTXlator2ByteFloat.DPT_TEMPERATURE;
+import static io.calimero.dptxlator.DPTXlator2ByteFloat.DPT_TEMPERATURE;
 
-import tuwien.auto.calimero.DataUnitBuilder;
-import tuwien.auto.calimero.GroupAddress;
-import tuwien.auto.calimero.KNXException;
-import tuwien.auto.calimero.KNXFormatException;
-import tuwien.auto.calimero.datapoint.DatapointMap;
-import tuwien.auto.calimero.datapoint.DatapointModel;
-import tuwien.auto.calimero.datapoint.StateDP;
-import tuwien.auto.calimero.dptxlator.DPTXlator;
-import tuwien.auto.calimero.dptxlator.DPTXlator2ByteFloat;
-import tuwien.auto.calimero.dptxlator.TranslatorTypes;
+import io.calimero.DataUnitBuilder;
+import io.calimero.GroupAddress;
+import io.calimero.KNXException;
+import io.calimero.KNXFormatException;
+import io.calimero.datapoint.DatapointMap;
+import io.calimero.datapoint.DatapointModel;
+import io.calimero.datapoint.StateDP;
+import io.calimero.dptxlator.DPTXlator;
+import io.calimero.dptxlator.DPTXlator2ByteFloat;
+import io.calimero.dptxlator.TranslatorTypes;
 
 /**
  * Shows several ways of translating KNX datapoint type using Calimero DPT translators.

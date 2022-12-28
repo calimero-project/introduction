@@ -1,7 +1,7 @@
-import tuwien.auto.calimero.KNXException
-import tuwien.auto.calimero.knxnetip.KNXnetIPConnection
-import tuwien.auto.calimero.link.KNXNetworkLinkIP
-import tuwien.auto.calimero.link.medium.TPSettings
+import io.calimero.KNXException
+import io.calimero.knxnetip.KNXnetIPConnection
+import io.calimero.link.KNXNetworkLinkIP
+import io.calimero.link.medium.TPSettings
 import java.net.InetSocketAddress
 
 /**

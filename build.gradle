@@ -41,8 +41,8 @@ compileJava.options*.compilerArgs = [
 
 dependencies {
     implementation 'org.usb4java:usb4java-javax:1.3.0'
-    implementation "com.github.calimero:calimero-core:${version}"
-    implementation "com.github.calimero:calimero-device:${version}"
-    runtimeOnly "com.github.calimero:calimero-rxtx:${version}"
+    implementation "io.calimero:calimero-core:${version}"
+    implementation "io.calimero:calimero-device:${version}"
+    runtimeOnly "io.calimero:calimero-rxtx:${version}"
 	runtimeOnly 'org.slf4j:slf4j-simple:1.7.36'
 }

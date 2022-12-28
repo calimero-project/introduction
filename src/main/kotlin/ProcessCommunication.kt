@@ -1,8 +1,8 @@
-import tuwien.auto.calimero.GroupAddress
-import tuwien.auto.calimero.KNXException
-import tuwien.auto.calimero.link.KNXNetworkLinkIP
-import tuwien.auto.calimero.link.medium.TPSettings
-import tuwien.auto.calimero.process.ProcessCommunicatorImpl
+import io.calimero.GroupAddress
+import io.calimero.KNXException
+import io.calimero.link.KNXNetworkLinkIP
+import io.calimero.link.medium.TPSettings
+import io.calimero.process.ProcessCommunicatorImpl
 import java.net.InetSocketAddress
 
 /**

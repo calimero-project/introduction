@@ -17,11 +17,11 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-import tuwien.auto.calimero.GroupAddress;
-import tuwien.auto.calimero.GroupAddress.Presentation;
-import tuwien.auto.calimero.IndividualAddress;
-import tuwien.auto.calimero.KNXAddress;
-import tuwien.auto.calimero.KNXFormatException;
+import io.calimero.GroupAddress;
+import io.calimero.GroupAddress.Presentation;
+import io.calimero.IndividualAddress;
+import io.calimero.KNXAddress;
+import io.calimero.KNXFormatException;
 
 /**
  * Introduction to KNX addresses, and their different representations.
