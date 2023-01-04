@@ -42,7 +42,7 @@ For Kotlin, an example can be run via Gradle by appending "Kt" to the class name
 
 - Read device information of the Calimero KNX device, for example with the ETS device info diagnostics. Or, use the Calimero device info tool `./gradlew run --args="devinfo 224.0.23.12 1.1.10"`.
 
-- Discover the KNX IP device. With the Calimero discover tool, `./gradlew run -Dexec.args="discover"`
+- Discover the KNX IP device. With the Calimero discover tool, `./gradlew run --args="discover"`
 
   Example output:
 
