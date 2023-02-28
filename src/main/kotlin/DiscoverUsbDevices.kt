@@ -1,4 +1,3 @@
-import io.calimero.serial.usb.UsbConnection
 import javax.usb.UsbDevice
 
 /**
@@ -10,8 +9,8 @@ import javax.usb.UsbDevice
 
 fun main() {
     println("List of KNX USB & USB virtual serial devices")
-    println("KNX USB devices: " + list(UsbConnection.getKnxDevices()))
-    println("KNX serial devices: " + list(UsbConnection.getVirtualSerialKnxDevices()))
+//    println("KNX USB devices: " + list(UsbConnection.getKnxDevices()))
+//    println("KNX serial devices: " + list(UsbConnection.getVirtualSerialKnxDevices()))
 }
 
 private fun list(d: List<UsbDevice>) = d.joinToString(", ") { deviceInfo(it) }
