@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2014, 2021 B. Malinowsky
+    Copyright (c) 2014, 2023 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ import tuwien.auto.calimero.KNXFormatException;
 /**
  * Introduction to KNX addresses, and their different representations.
  * <p>
- * This example helps getting used to the different KNX address formats. It prints the different representations of a
+ * This example helps to get used to the different KNX address formats. It prints the different representations of a
  * KNX address to <code>System.out</code>.
  * <p>
  * KNX addresses are either group addresses, using 2-level or 3-level formatting, or individual addresses. The KNX

@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2015, 2021 B. Malinowsky
+    Copyright (c) 2015, 2023 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ import tuwien.auto.calimero.process.ProcessEvent;
 /**
  * An LTE device, for KNX LTE-HEE runtime communication over KNX IP.
  * This example extends {@link KnxDeviceServiceLogic} with the capability to send and respond to LTE-HEE messages,
- * and supports KNX IP discovery {@literal &} self description.
+ * and supports KNX IP discovery {@literal &} self-description.
  * <p>
  * This class can be run as Java program directly in a terminal, and terminated by thread interruption or entering an
  * arbitray character that is read by {@link System.in}.
@@ -90,7 +90,7 @@ public class LteDevice extends KnxDeviceServiceLogic implements Runnable {
 	public void run() {
 		// For setup, we need to do two things:
 		// 1) instantiate our KNX device
-		// 2) setup a network link so our device can talk to the KNX network, in our example we use IP routing
+		// 2) set up a network link so our device can talk to the KNX network, in our example we use IP routing
 		try (var device = new BaseKnxDevice(deviceName, this);
 			 var link = newLink()) {
 
