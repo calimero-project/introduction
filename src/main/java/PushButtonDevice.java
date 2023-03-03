@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2015, 2021 B. Malinowsky
+    Copyright (c) 2015, 2023 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -70,7 +70,7 @@ public class PushButtonDevice extends KnxDeviceServiceLogic
 	// Initialize some constants for this example
 
 	// The name/ID of our KNX device. It can be arbitrarily assigned by the user application, e.g.,
-	// a human readable name, or some unique ID.
+	// a human-readable name, or some unique ID.
 	// It is used for KNXnet/IP device discovery, and therefore, limited to a maximum of 29 ISO 8859-1 characters.
 	private static final String deviceName = "Push Button (KNX IP)";
 
@@ -94,7 +94,7 @@ public class PushButtonDevice extends KnxDeviceServiceLogic
 		// We need to do three things:
 		// 1) initialize the push-button logic (this class), implementing the functionality of our switch
 		// 2) instantiate our KNX device
-		// 3) setup a network link so our push-button can talk to the KNX network
+		// 3) set up a network link so our push-button can talk to the KNX network
 
 		final PushButtonDevice logic = new PushButtonDevice();
 		// Every KNX device provides a datapoint model, where all the datapoints of that device are stored.

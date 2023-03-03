@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2015, 2021 B. Malinowsky
+    Copyright (c) 2015, 2023 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -46,15 +46,13 @@ import io.calimero.SerialNumber;
 import io.calimero.datapoint.Datapoint;
 import io.calimero.device.BaseKnxDevice;
 import io.calimero.device.KnxDeviceServiceLogic;
-import io.calimero.device.ios.SecurityObject;
-import io.calimero.device.ios.SecurityObject.Pid;
 import io.calimero.dptxlator.DPTXlator;
 import io.calimero.link.KNXNetworkLinkIP;
 import io.calimero.link.medium.KnxIPSettings;
 
 /**
  * A programmable device, using KNX IP to communicate with other KNX endpoints. This example extends
- * {@link KnxDeviceServiceLogic} and supports KNX IP discovery {@literal &} self description.
+ * {@link KnxDeviceServiceLogic} and supports KNX IP discovery {@literal &} self-description.
  * <p>
  * This example is about programming via ETS and does not implement KNX process communication.
  * <p>
@@ -82,7 +80,7 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 		// We need to do three things:
 		// 1) initialize the device logic (this class), which implements the mgmt functionality of our device
 		// 2) instantiate our KNX device
-		// 3) setup a network link using IP routing, so our device can talk to the KNX network
+		// 3) set up a network link using IP routing, so our device can talk to the KNX network
 
 		final ProgrammableDevice logic = new ProgrammableDevice();
 
