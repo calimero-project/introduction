@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2018, 2021 B. Malinowsky
+    Copyright (c) 2018, 2023 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ import tuwien.auto.calimero.link.medium.TPSettings;
 
 /**
  * This example shows how to establish a secure client routing link using KNX IP Secure. Minimum requirements are
- * Calimero version &ge; 2.6-SNAPSHOT and Java SE 11 (module java.base).
+ * Calimero version &ge; 3.0-SNAPSHOT and Java SE 17 (module java.base).
  * <p>
  * You can safely run this example, the (established) connection listens to incoming frames and is closed without
  * sending KNX messages to the KNX network.

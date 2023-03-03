@@ -3,7 +3,7 @@ Introduction to Calimero
 
 This repository contains additional documentation for Calimero and code examples using Java and Kotlin.
 
-All examples require Java 11 and can be built using Gradle (`./gradlew build`). A single example can be executed via Gradle by specifying the class like `./gradlew run -DmainClass=GroupMonitor`.
+All examples require Java 17 and can be built using Gradle (`./gradlew build`). A single example can be executed via Gradle by specifying the class like `./gradlew run -DmainClass=GroupMonitor`.
 
 For Kotlin, an example can be run via Gradle by appending "Kt" to the class name, e.g., for _DiscoverKnxServers_ this would be `./gradlew run -DmainClass=DiscoverKnxServersKt`
 
@@ -59,5 +59,6 @@ For Kotlin, an example can be run via Gradle by appending "Kt" to the class name
 
 ### Archived examples
 
+* Examples for Calimero v2.6 (requires Java 11) can be found on the [2.6 branch](https://github.com/calimero-project/introduction/tree/2.6)
 * Examples for Calimero v2.4 (requires Java 8) can be found on the [release/2.4 branch](https://github.com/calimero-project/introduction/tree/release/2.4)
 * Examples for Calimero v2.3 (or earlier) can be found on the [release/2.3 branch](https://github.com/calimero-project/introduction/tree/release/2.3)
