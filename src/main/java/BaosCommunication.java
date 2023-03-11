@@ -34,7 +34,8 @@
     version.
 */
 
-import tuwien.auto.calimero.DataUnitBuilder;
+import java.util.HexFormat;
+
 import tuwien.auto.calimero.KNXException;
 import tuwien.auto.calimero.SerialNumber;
 import tuwien.auto.calimero.baos.BaosLinkAdapter;
@@ -77,7 +78,7 @@ public class BaosCommunication {
 						else if (item.info() == Property.ConnectionState)
 							value = item.data()[0] == 1 ? "connected" : "not connected";
 						else
-							value = DataUnitBuilder.toHex(item.data(), "");
+							value = HexFormat.of().formatHex(item.data());
 
 						System.out.println(item.info() + " = " + value);
 					}

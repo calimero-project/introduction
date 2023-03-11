@@ -17,9 +17,9 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+import java.util.HexFormat;
 import java.util.Optional;
 
-import tuwien.auto.calimero.DataUnitBuilder;
 import tuwien.auto.calimero.secure.Keyring;
 
 /**
@@ -106,7 +106,7 @@ public class KeyringViewer {
 	}
 
 	private String decryptKey(final byte[] input) {
-		return "'" + DataUnitBuilder.toHex(keyring.decryptKey(input, keyringPwd), "") + "'";
+		return "'" + HexFormat.of().formatHex(keyring.decryptKey(input, keyringPwd)) + "'";
 	}
 
 	private static void header(final String header) {

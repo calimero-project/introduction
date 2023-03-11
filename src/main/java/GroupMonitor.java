@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2015, 2021 B. Malinowsky
+    Copyright (c) 2015, 2023 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,8 +19,8 @@
 
 import java.net.InetSocketAddress;
 import java.time.LocalTime;
+import java.util.HexFormat;
 
-import tuwien.auto.calimero.DataUnitBuilder;
 import tuwien.auto.calimero.DetachEvent;
 import tuwien.auto.calimero.KNXException;
 import tuwien.auto.calimero.link.KNXNetworkLink;
@@ -83,7 +83,7 @@ public class GroupMonitor implements ProcessListener {
 	private static void print(final String svc, final ProcessEvent e) {
 		try {
 			System.out.println(LocalTime.now() + " " + e.getSourceAddr() + "->" + e.getDestination() + " " + svc
-					+ ": " + DataUnitBuilder.toHex(e.getASDU(), ""));
+					+ ": " + HexFormat.of().formatHex(e.getASDU()));
 		}
 		catch (final RuntimeException ex) {
 			System.err.println(ex);

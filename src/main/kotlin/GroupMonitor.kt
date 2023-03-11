@@ -7,6 +7,7 @@ import tuwien.auto.calimero.process.ProcessEvent
 import tuwien.auto.calimero.process.ProcessListener
 import java.net.InetSocketAddress
 import java.time.LocalTime
+import java.util.HexFormat
 
 /**
  * Example code showing how to use KNX process communication for group monitoring on a KNX Twisted Pair 1 (TP1) network.
@@ -46,7 +47,7 @@ private class MonitorListener : ProcessListener {
 // KNX source and destination address, and Application Service Data Unit (ASDU) to System.out.
 private fun print(svc: String, e: ProcessEvent) {
     try {
-        println("${LocalTime.now()} ${e.sourceAddr}->${e.destination} $svc: ${DataUnitBuilder.toHex(e.asdu, "")}")
+        println("${LocalTime.now()} ${e.sourceAddr}->${e.destination} $svc: ${HexFormat.of().formatHex(e.asdu)}")
     } catch (ex: RuntimeException) {
         System.err.println(ex)
     }
