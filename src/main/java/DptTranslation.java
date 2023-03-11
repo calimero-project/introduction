@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2017 B. Malinowsky
+    Copyright (c) 2017, 2023 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,7 +19,8 @@
 
 import static io.calimero.dptxlator.DPTXlator2ByteFloat.DPT_TEMPERATURE;
 
-import io.calimero.DataUnitBuilder;
+import java.util.HexFormat;
+
 import io.calimero.GroupAddress;
 import io.calimero.KNXException;
 import io.calimero.KNXFormatException;
@@ -64,7 +65,7 @@ public class DptTranslation
 		// set temperature value of -4 degree celsius (physical unit can be omitted)
 		t.setValue("-4 \u00b0C");
 		// get KNX translated data
-		System.out.println(t.getValue() + " translated to knx data: 0x" + DataUnitBuilder.toHex(t.getData(), ""));
+		System.out.println(t.getValue() + " translated to knx data: 0x" + HexFormat.of().formatHex(t.getData()));
 	}
 
 	private static void createUsingDpt(final byte[] data) throws KNXException, KNXFormatException

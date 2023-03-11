@@ -38,9 +38,8 @@ import java.io.IOException;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
+import java.util.HexFormat;
 
-import io.calimero.DataUnitBuilder;
 import io.calimero.IndividualAddress;
 import io.calimero.KNXException;
 import io.calimero.LteHeeTag;
@@ -146,11 +145,11 @@ public class LteDevice extends KnxDeviceServiceLogic implements Runnable {
 			final int companyCode = ((asdu[4] & 0xff) << 8) | (asdu[5] & 0xff);
 			final int privatePid = asdu[6] & 0xff;
 			System.out.println(tag + " IOT " + iot + " OI " + dummyOi + " company " + companyCode + " PID " + privatePid
-					+ ": " + DataUnitBuilder.toHex(Arrays.copyOfRange(asdu, 7, asdu.length), ""));
+					+ ": " + HexFormat.of().formatHex(asdu, 7, asdu.length));
 		}
 		else
 			System.out.println(tag + " IOT " + iot + " OI " + dummyOi + " PID " + pid + ": "
-					+ DataUnitBuilder.toHex(Arrays.copyOfRange(asdu, 4, asdu.length), ""));
+					+ HexFormat.of().formatHex(asdu, 4, asdu.length));
 
 		final var roomTempResponse = new ServiceResult<byte[]>() {
 			@Override

@@ -34,7 +34,8 @@
     version.
 */
 
-import io.calimero.DataUnitBuilder;
+import java.util.HexFormat;
+
 import io.calimero.KNXException;
 import io.calimero.SerialNumber;
 import io.calimero.baos.BaosLinkAdapter;
@@ -77,7 +78,7 @@ public class BaosCommunication {
 						else if (item.info() == Property.ConnectionState)
 							value = item.data()[0] == 1 ? "connected" : "not connected";
 						else
-							value = DataUnitBuilder.toHex(item.data(), "");
+							value = HexFormat.of().formatHex(item.data());
 
 						System.out.println(item.info() + " = " + value);
 					}
