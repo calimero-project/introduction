@@ -63,7 +63,7 @@ public class DptTranslation
 		System.out.println("temperature is " + formatted + " (" + temperature + ")");
 
 		// set temperature value of -4 degree celsius (physical unit can be omitted)
-		t.setValue("-4 \u00b0C");
+		t.setValue("-4 °C");
 		// get KNX translated data
 		System.out.println(t.getValue() + " translated to knx data: 0x" + HexFormat.of().formatHex(t.getData()));
 	}
