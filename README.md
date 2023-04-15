@@ -11,6 +11,7 @@ For Kotlin, an example can be run via Gradle by appending "Kt" to the class name
 * [Discover KNX USB devices](src/main/java/DiscoverUsbDevices.java)
 * [Create client-side KNXnet/IP tunneling network link](src/main/java/CreateTunnelingLink.java)
 * [KNX IP Secure routing network link](src/main/java/KnxipSecure.java)
+* [KNX IP Secure tunneling network link](src/main/java/SecureTunnelingLink.java)
 * [Create client-side KNX USB network link](src/main/java/CreateUsbLink.java)
 * [Create TPUART network monitor link](src/main/java/CreateTpuartMonitor.java)
 * [Process communication](src/main/java/ProcessCommunication.java)
