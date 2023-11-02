@@ -22,6 +22,7 @@ import java.net.NetworkInterface;
 import java.net.UnknownHostException;
 
 import io.calimero.GroupAddress;
+import io.calimero.IndividualAddress;
 import io.calimero.KNXException;
 import io.calimero.buffer.Configuration;
 import io.calimero.buffer.NetworkBuffer;
@@ -46,10 +47,10 @@ public class NetworkStateBuffering
 	{
 		// Like always, create a network link of your choice
 		try (KNXNetworkLink link = KNXNetworkLinkIP.newRoutingLink((NetworkInterface) null,
-				InetAddress.getByName(KNXnetIPRouting.DEFAULT_MULTICAST), new KnxIPSettings(null))) {
+				KNXnetIPRouting.DefaultMulticast, new KnxIPSettings(new IndividualAddress(1, 2, 3)));
+		     // setup Calimero network buffer
+		     NetworkBuffer nb = NetworkBuffer.createBuffer("my-networkbuffer")) {
 
-			// setup Calimero network buffer
-			final NetworkBuffer nb = NetworkBuffer.createBuffer("my-networkbuffer");
 			final Configuration config = nb.addConfiguration(link);
 			// create a filter, here we use a default filter for state-based requests
 			final StateFilter f = new StateFilter();

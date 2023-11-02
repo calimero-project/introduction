@@ -55,9 +55,6 @@ public class CreateTpuartMonitor
 				{
 					System.out.println(e.getFrame() + ": " + ((MonitorFrameEvent) e).getRawFrame());
 				}
-
-				@Override
-				public void linkClosed(final CloseEvent e) {}
 			});
 
 			// let's wait some seconds to monitor KNX frames
