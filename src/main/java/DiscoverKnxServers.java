@@ -37,9 +37,9 @@ public class DiscoverKnxServers {
 			final boolean useNAT = false;
 			Discoverer.udp(useNAT).timeout(Duration.ofSeconds(3)).search().get().forEach(r ->
 					System.out.format("%s %s <=> %s%n",
-							r.getNetworkInterface().getName(),
+							r.networkInterface().getName(),
 							r.localEndpoint(),
-							r.getResponse().toString().replace(", ", "\n\t")));
+							r.response().toString().replace(", ", "\n\t")));
 		}
 		catch (InterruptedException | ExecutionException e) {
 			System.err.println("Error during KNXnet/IP discovery: " + e);
