@@ -57,7 +57,7 @@ import tuwien.auto.calimero.link.medium.KnxIPSettings;
  * This example is about programming via ETS and does not implement KNX process communication.
  * <p>
  * This class can be run as Java program directly in a terminal, and terminated by thread interruption or entering an
- * arbitray character that is read by {@link System.in}.
+ * arbitray character that is read by {@link System#in}.
  */
 public class ProgrammableDevice extends KnxDeviceServiceLogic {
 	// The name/ID of our KNX device.

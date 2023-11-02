@@ -60,7 +60,7 @@ import tuwien.auto.calimero.process.ProcessEvent;
  * and supports KNX IP discovery {@literal &} self-description.
  * <p>
  * This class can be run as Java program directly in a terminal, and terminated by thread interruption or entering an
- * arbitray character that is read by {@link System.in}.
+ * arbitray character that is read by {@link System#in}.
  */
 public class LteDevice extends KnxDeviceServiceLogic implements Runnable {
 	// The name/ID of our KNX device.

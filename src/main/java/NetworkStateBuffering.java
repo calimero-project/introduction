@@ -17,11 +17,11 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.UnknownHostException;
 
 import tuwien.auto.calimero.GroupAddress;
+import tuwien.auto.calimero.IndividualAddress;
 import tuwien.auto.calimero.KNXException;
 import tuwien.auto.calimero.buffer.Configuration;
 import tuwien.auto.calimero.buffer.NetworkBuffer;
@@ -46,10 +46,10 @@ public class NetworkStateBuffering
 	{
 		// Like always, create a network link of your choice
 		try (KNXNetworkLink link = KNXNetworkLinkIP.newRoutingLink((NetworkInterface) null,
-				InetAddress.getByName(KNXnetIPRouting.DEFAULT_MULTICAST), new KnxIPSettings(null))) {
+				KNXnetIPRouting.DefaultMulticast, new KnxIPSettings(new IndividualAddress(1, 2, 3)));
+		     // setup Calimero network buffer
+		     NetworkBuffer nb = NetworkBuffer.createBuffer("my-networkbuffer")) {
 
-			// setup Calimero network buffer
-			final NetworkBuffer nb = NetworkBuffer.createBuffer("my-networkbuffer");
 			final Configuration config = nb.addConfiguration(link);
 			// create a filter, here we use a default filter for state-based requests
 			final StateFilter f = new StateFilter();
