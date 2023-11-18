@@ -3,7 +3,7 @@ plugins {
 	id 'org.jetbrains.kotlin.jvm' version '1.9.20'
 	id 'eclipse'
 	id 'application'
-	id "com.github.ben-manes.versions" version "0.49.0"
+	id "com.github.ben-manes.versions" version "0.50.0"
 	id 'maven-publish'
 	id 'signing'
 }
@@ -47,7 +47,7 @@ dependencies {
     implementation "io.calimero:calimero-device:${version}"
     implementation 'org.usb4java:usb4java-javax:1.3.0'
     runtimeOnly "io.calimero:calimero-rxtx:${version}"
-    
+
 	runtimeOnly 'org.slf4j:slf4j-jdk-platform-logging:2.0.9'
 	runtimeOnly 'org.slf4j:slf4j-simple:2.0.9'
 }
