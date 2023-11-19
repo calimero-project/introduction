@@ -1,4 +1,6 @@
-import javax.usb.UsbDevice
+
+import io.calimero.serial.usb.UsbConnectionFactory
+import io.calimero.serial.usb.Device
 
 /**
  * This example lists all found KNX USB and USB virtual serial devices. Only devices for KNX communication are listed
@@ -9,21 +11,7 @@ import javax.usb.UsbDevice
 
 fun main() {
     println("List of KNX USB & USB virtual serial devices")
-//    println("KNX USB devices: " + list(UsbConnection.getKnxDevices()))
-//    println("KNX serial devices: " + list(UsbConnection.getVirtualSerialKnxDevices()))
+    println(list(UsbConnectionFactory.attachedKnxUsbDevices()))
 }
 
-private fun list(d: List<UsbDevice>) = d.joinToString(", ") { deviceInfo(it) }
-
-// returns a short string with usb device info
-private fun deviceInfo(d: UsbDevice): String {
-    var description = "description n/a"
-    runCatching {
-        description = "${truncateAtNull(d.manufacturerString)} - ${truncateAtNull(d.productString)}"
-    }
-    val dd = d.usbDeviceDescriptor
-    return "%s [%04x:%04x]".format(description, dd.idVendor(), dd.idProduct())
-}
-
-// necessary because usb lib does not correctly cut off C strings at NULL character
-private fun truncateAtNull(s: String) = s.substringBefore(0.toChar())
+private fun list(devices: Set<Device>) = if (devices.isEmpty()) "none found" else devices.joinToString("\n") { it.toString() }

@@ -17,15 +17,7 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-import static java.util.stream.Collectors.joining;
-
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-
-import javax.usb.UsbDevice;
-import javax.usb.UsbDeviceDescriptor;
-import javax.usb.UsbDisconnectedException;
-import javax.usb.UsbException;
+import io.calimero.serial.usb.UsbConnectionFactory;
 
 /**
  * This example lists all found KNX USB and USB virtual serial devices. Only devices for KNX communication are listed
@@ -36,36 +28,13 @@ import javax.usb.UsbException;
  *
  * @author B. Malinowsky
  */
-public class DiscoverUsbDevices
-{
-	public static void main(final String[] args)
-	{
-		System.out.println("List of KNX USB & USB virtual serial devices");
-//		System.out.println("KNX USB devices: " + list(UsbConnection.getKnxDevices()));
-//		System.out.println("KNX serial devices: " + list(UsbConnection.getVirtualSerialKnxDevices()));
-	}
-
-	private static String list(final List<UsbDevice> d)
-	{
-		return d.stream().map(DiscoverUsbDevices::deviceInfo).collect(joining(", "));
-	}
-
-	// returns a short string with usb device infos
-	private static String deviceInfo(final UsbDevice d)
-	{
-		String description = "description n/a";
-		final UsbDeviceDescriptor dd = d.getUsbDeviceDescriptor();
-		try {
-			description = truncateAtNull(d.getManufacturerString()) + " - " + truncateAtNull(d.getProductString());
-		}
-		catch (UnsupportedEncodingException | UsbDisconnectedException | UsbException e) {}
-		return String.format("%s [%04x:%04x]", description, dd.idVendor(), dd.idProduct());
-	}
-
-	// necessary because usb lib does not correctly cut off C strings at NULL character
-	private static String truncateAtNull(final String s)
-	{
-		final int end = s.indexOf((char) 0);
-		return end > -1 ? s.substring(0, end) : s;
+public class DiscoverUsbDevices {
+	public static void main(final String[] args) {
+		System.out.println("List of KNX USB devices:");
+		var devices = UsbConnectionFactory.attachedKnxUsbDevices();
+		if (devices.isEmpty())
+			System.out.println("none found");
+		else
+			devices.forEach(System.out::println);
 	}
 }
