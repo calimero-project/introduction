@@ -46,5 +46,6 @@ dependencies {
     implementation "com.github.calimero:calimero-core:${version}"
     implementation "com.github.calimero:calimero-device:${version}"
     runtimeOnly "com.github.calimero:calimero-rxtx:${version}"
+	runtimeOnly "io.calimero:calimero-usb:${version}"
 	runtimeOnly 'org.slf4j:slf4j-simple:1.7.36'
 }
