@@ -46,6 +46,7 @@ dependencies {
     implementation "io.calimero:calimero-core:${version}"
     implementation "io.calimero:calimero-device:${version}"
     runtimeOnly "io.calimero:calimero-rxtx:${version}"
+	runtimeOnly "io.calimero:calimero-usb:${version}"
 
 	runtimeOnly 'org.slf4j:slf4j-jdk-platform-logging:2.0.9'
 	runtimeOnly 'org.slf4j:slf4j-simple:2.0.9'
