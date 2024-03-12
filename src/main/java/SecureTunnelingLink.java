@@ -33,7 +33,7 @@ import tuwien.auto.calimero.link.medium.TPSettings;
 
 /**
  * This example shows how to establish a secure client tunneling link using KNX IP Secure. Minimum requirements are
- * Calimero version &ge; 3.0-SNAPSHOT and Java SE 17 (module java.base).
+ * Calimero version &ge; 2.6-SNAPSHOT and Java SE 17 (module java.base).
  * <p>
  * You can safely run this example, the (established) connection listens to incoming frames and is closed without
  * sending KNX messages to the KNX network.
