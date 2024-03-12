@@ -1,4 +1,3 @@
-
 import tuwien.auto.calimero.serial.usb.UsbConnectionFactory
 import tuwien.auto.calimero.serial.usb.Device
 
@@ -10,8 +9,7 @@ import tuwien.auto.calimero.serial.usb.Device
  */
 
 fun main() {
-    println("List of KNX USB & USB virtual serial devices")
-    println(list(UsbConnectionFactory.attachedKnxUsbDevices()))
+    println("List of KNX USB devices:\n" + list(UsbConnectionFactory.attachedKnxUsbDevices()))
 }
 
 private fun list(devices: Set<Device>) = if (devices.isEmpty()) "none found" else devices.joinToString("\n") { it.toString() }

@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2016, 2023 B. Malinowsky
+    Copyright (c) 2016, 2024 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,8 +30,8 @@ import tuwien.auto.calimero.serial.usb.UsbConnectionFactory;
  */
 public class DiscoverUsbDevices {
 	public static void main(final String[] args) {
-		System.out.println("List of KNX USB devices:");
 		final var devices = UsbConnectionFactory.attachedKnxUsbDevices();
+		System.out.println("List of KNX USB devices:");
 		if (devices.isEmpty())
 			System.out.println("none found");
 		else
