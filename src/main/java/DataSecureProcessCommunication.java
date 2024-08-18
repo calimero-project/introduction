@@ -12,16 +12,18 @@ import io.calimero.secure.Keyring;
 import io.calimero.secure.Security;
 
 /**
- * This example shows how to use KNX Secure process communication (using a KNX USB device link). For communicating with
- * a single KNX installation, providing the necessary keys to {@code Security.defaultInstallation()} is sufficient for
- * any subsequent communication via KNX Secure.
+ * This example shows how to use KNX Data Secure process communication (using a KNX USB device link). For communicating
+ * with a single KNX installation, providing the necessary keys to {@code Security.defaultInstallation()} is sufficient
+ * for any subsequent communication via KNX Data Secure.<br>
+ * Because a client application is usually not configured as part of a KNX Data Secure installation, it is
+ * not recognized as KNX Data Secure device. Therefore, secure process communication relies on Group Object Diagnostics.
  * <p>
  * Minimum requirements are Calimero version 3.0-SNAPSHOT and Java SE 17 (java.base).
  * <p>
  * You can safely run this example; the established connection is closed 10 seconds after creation. No KNX messages are
  * sent to the KNX network.
  */
-public class SecureProcessCommunication {
+public class DataSecureProcessCommunication {
 	// Specify your KNX USB device; either use the product or manufacturer name, or the USB vendor:product ID
 	private static final String device = "weinzierl";
 
@@ -30,9 +32,9 @@ public class SecureProcessCommunication {
 	private static final char[] keyringPwd = "keyring-pwd".toCharArray();
 
 	public static void main(final String... args) throws KNXException, InterruptedException {
-		System.out.println("Establish KNX Secure process communication using the KNX USB device '" + device + "'");
+		System.out.println("Establish KNX Data Secure process communication using the KNX USB device '" + device + "'");
 
-		// Provide the keyring to use by default for KNX Secure communication
+		// Provide the keyring to use by default for KNX Data Secure
 		Security.defaultInstallation().useKeyring(Keyring.load(keyringUri), keyringPwd);
 
 		// Create the KNX USB device link as you would for plain communication
@@ -40,7 +42,7 @@ public class SecureProcessCommunication {
 			// This process communicator constructor uses the keys of the default installation
 			var pc = new ProcessCommunicatorImpl(knxLink)) {
 
-			// Add a process listener which prints (decrypted) KNX Secure process events
+			// Add a process listener which prints (decrypted) process events
 			pc.addProcessListener(new ProcessListener() {
 				@Override
 				public void groupWrite(final ProcessEvent e) { print("write.ind", e); }
@@ -55,10 +57,10 @@ public class SecureProcessCommunication {
 				public void detached(final DetachEvent e) {}
 			});
 
-			System.out.println("KNX Secure is ready");
+			System.out.println("KNX Data Secure is ready");
 
-			// Writing datapoint values will use KNX Secure if indicated by the used keyring
-			// pc.write(...);
+			// Writing datapoint values will use KNX Data Secure if indicated by the used keyring
+//			pc.write(...);
 
 			Thread.sleep(10_000);
 		}
