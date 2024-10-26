@@ -15,7 +15,7 @@ For Kotlin, an example can be run via Gradle by appending "Kt" to the class name
 * [Create client-side KNX USB network link](src/main/java/CreateUsbLink.java)
 * [Create TPUART network monitor link](src/main/java/CreateTpuartMonitor.java)
 * [Process communication](src/main/java/ProcessCommunication.java)
-* [Process communication using KNX Secure](src/main/java/SecureProcessCommunication.java)
+* [Process communication using KNX Secure](src/main/java/DataSecureProcessCommunication.java)
 * [Group monitor](src/main/java/GroupMonitor.java)
 * [KNX address converter](src/main/java/KnxAddressConverter.java), e.g., `./gradlew run -DmainClass=KnxAddressConverter --args="1/2/3"`
 * [DPT translation](src/main/java/DptTranslation.java)

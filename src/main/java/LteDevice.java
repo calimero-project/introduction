@@ -81,7 +81,7 @@ public class LteDevice extends KnxDeviceServiceLogic implements Runnable {
 
 
 	// Runs the LTE device
-	public static void main(final String[] args) throws KNXException, IOException {
+	public static void main(final String[] args) {
 		new LteDevice().run();
 	}
 
@@ -102,13 +102,10 @@ public class LteDevice extends KnxDeviceServiceLogic implements Runnable {
 			device.setDeviceLink(link);
 			System.out.println(device + " is up");
 			// every 10 seconds, send group property info with the specified property
-			try {
-				while (true) {
-					sendRoomTempInfo(tempRoom);
-					Thread.sleep(10_000);
-				}
+			while (true) {
+				sendRoomTempInfo(tempRoom);
+				Thread.sleep(10_000);
 			}
-			catch (final InterruptedException e) {}
 		}
 		catch (final KNXException e) {
 			System.err.println("Initializing link of " + deviceName + " failed: " + e.getMessage());
@@ -116,6 +113,7 @@ public class LteDevice extends KnxDeviceServiceLogic implements Runnable {
 		catch (final SocketException e) {
 			System.err.println("Network interface problem: " + e.getMessage());
 		}
+		catch (final InterruptedException e) {}
 		finally {
 			System.out.println(deviceName + " has left the building.");
 		}
