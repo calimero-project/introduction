@@ -69,7 +69,7 @@ public class KnxAddressConverter {
 				try {
 					type = KNXAddress.create(addr).getType();
 				}
-				catch (final KNXFormatException e) {}
+				catch (final KNXFormatException ignore) {}
 				out("address type=" + type + ": group=" + new GroupAddress(addr) + " (2-level=" + g2 + "), ind="
 						+ new IndividualAddress(ga.getRawAddress()) + ", raw=" + ga.getRawAddress());
 			}
