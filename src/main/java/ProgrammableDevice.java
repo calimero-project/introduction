@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2015, 2023 B. Malinowsky
+    Copyright (c) 2015, 2025 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -84,12 +84,12 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 
 		final ProgrammableDevice logic = new ProgrammableDevice();
 
-		// Specify storage of device's interface object server (IOS). A device will initialize it's IOS from it if the
+		// Specify storage of device's interface object server (IOS). A device will initialize its IOS from it if the
 		// resource exists; otherwise, the resource is created during closing the device.
-		// If you program a secure device, you might want to use a non-empty password for file encryption in BaseKnxDevice constructor.
 		final var iosResource = Path.of(".", "src", "main", "resources", "device.xml").toAbsolutePath().normalize();
 
 		final var ipSettings = new KnxIPSettings(deviceAddress);
+		// If you program a secure device, you might want to use a non-empty password for file encryption in BaseKnxDevice constructor.
 		try (var device = new BaseKnxDevice(deviceName, logic, iosResource.toUri(), new char[0]);
 				var link = KNXNetworkLinkIP.newRoutingLink(NetworkInterface.getByName(networkInterface),
 						KNXNetworkLinkIP.DefaultMulticast, ipSettings)) {

@@ -30,7 +30,7 @@ fun main() {
         }
     } catch (e: KNXException) {
         println("Error accessing KNX datapoint: ${e.message}")
-    } catch (e: InterruptedException) {
-        println("Error accessing KNX datapoint: ${e.message}")
+    } catch (_: InterruptedException) {
+        println("Interrupted")
     }
 }
