@@ -12,7 +12,7 @@ import java.time.Duration
 
 /**
  * This example shows how to establish a secure client routing link using KNX IP Secure. Minimum requirements are
- * Calimero version 2.6-rc1.
+ * Calimero version 2.6-rc2.
  *
  * You can safely run this example, the (established) connection listens to incoming frames and is closed without
  * sending KNX messages to the KNX network.

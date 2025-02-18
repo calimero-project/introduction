@@ -7,7 +7,7 @@ import tuwien.auto.calimero.link.MonitorFrameEvent
 
 /**
  * This example shows how to establish a client network monitor ([KNXNetworkMonitor]) to a KNX TP1 network using
- * TP-UART serial communication. Minimum requirements are Calimero version 2.6-rc1.
+ * TP-UART serial communication. Minimum requirements are Calimero version 2.6-rc2.
  *
  * You can safely run this example; the (established) monitor connection is completely passive. No KNX messages are sent
  * to the KNX network. The network monitor will run for 10 seconds to let you monitor some KNX frames.

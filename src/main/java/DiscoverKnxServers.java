@@ -24,7 +24,7 @@ import tuwien.auto.calimero.knxnetip.Discoverer;
 
 /**
  * This example shows how to discover active KNXnet/IP servers in an IP network. Minimum requirements are Calimero
- * version 2.6-rc1 and Java SE 17 (java.base).
+ * version 2.6-rc2 and Java SE 17 (java.base).
  * <p>
  * You can safely run this example, no KNX messages are sent to the KNX network.
  */
