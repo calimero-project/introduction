@@ -1,6 +1,6 @@
 /*
     Calimero 2 - A library for KNX network access
-    Copyright (c) 2018, 2023 B. Malinowsky
+    Copyright (c) 2018, 2025 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,8 +22,8 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.time.Duration;
+import java.util.HexFormat;
 
-import tuwien.auto.calimero.DataUnitBuilder;
 import tuwien.auto.calimero.FrameEvent;
 import tuwien.auto.calimero.KNXException;
 import tuwien.auto.calimero.link.KNXNetworkLinkIP;
@@ -48,7 +48,7 @@ public class KnxipSecure {
 	private static final InetAddress multicastGroup = KNXNetworkLinkIP.DefaultMulticast;
 
 	/** Insert here your KNX IP Secure group key (backbone key). */
-	private static final byte[] groupKey = DataUnitBuilder.fromHex("85A0723F8C58A33333E4B6B7037C4F18");
+	private static final byte[] groupKey = HexFormat.of().parseHex("85A0723F8C58A33333E4B6B7037C4F18");
 
 
 	public static void main(final String[] args) throws SocketException, UnknownHostException {
