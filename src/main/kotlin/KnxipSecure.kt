@@ -1,4 +1,3 @@
-import io.calimero.DataUnitBuilder
 import io.calimero.FrameEvent
 import io.calimero.KNXException
 import io.calimero.link.KNXNetworkLinkIP
@@ -9,6 +8,7 @@ import java.net.NetworkInterface
 import java.net.SocketException
 import java.net.UnknownHostException
 import java.time.Duration
+import java.util.HexFormat
 
 /**
  * This example shows how to establish a secure client routing link using KNX IP Secure. Minimum requirements are
@@ -29,7 +29,7 @@ private const val local = "192.168.1.10"
 private val multicastGroup = KNXNetworkLinkIP.DefaultMulticast
 
 /** Insert here your KNX IP Secure group key (backbone key).  */
-private val groupKey = DataUnitBuilder.fromHex("85A0723F8C58A33333E4B6B7037C4F18")
+private val groupKey = HexFormat.of().parseHex("85A0723F8C58A33333E4B6B7037C4F18")
 
 
 @Throws(SocketException::class, UnknownHostException::class)

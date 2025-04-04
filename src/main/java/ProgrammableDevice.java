@@ -37,8 +37,8 @@
 import java.io.IOException;
 import java.net.NetworkInterface;
 import java.nio.file.Path;
+import java.util.HexFormat;
 
-import io.calimero.DataUnitBuilder;
 import io.calimero.DeviceDescriptor.DD0;
 import io.calimero.IndividualAddress;
 import io.calimero.KNXException;
@@ -99,11 +99,11 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 				// unused parts can have arbitrary values
 				final var deviceDescriptor = DD0.TYPE_0701;
 				final int manufacturerId = 0x04;
-				final var serialNumber = SerialNumber.from(DataUnitBuilder.fromHex("000a1c112913")); // 6 bytes
-				final byte[] hardwareType = DataUnitBuilder.fromHex("000000000223"); // 6 bytes
+				final var serialNumber = SerialNumber.from(HexFormat.of().parseHex("000a1c112913")); // 6 bytes
+				final byte[] hardwareType = HexFormat.of().parseHex("000000000223"); // 6 bytes
 				final byte[] programVersion = new byte[] { 0, 4, 0, 0, 0 }; // 5 bytes
 				// a valid FDSK is only required for secure device download
-				final byte[] fdsk = DataUnitBuilder.fromHex("35cb5a25771daf18d52d9ef7e39a2799"); // 16 bytes
+				final byte[] fdsk = HexFormat.of().parseHex("35cb5a25771daf18d52d9ef7e39a2799"); // 16 bytes
 
 				device.identification(deviceDescriptor, manufacturerId, serialNumber, hardwareType, programVersion, fdsk);
 
