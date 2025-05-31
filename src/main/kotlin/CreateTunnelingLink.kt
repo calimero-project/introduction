@@ -6,7 +6,7 @@ import java.net.InetSocketAddress
 
 /**
  * This example shows how to establish a client tunneling link to a KNXnet/IP server. Minimum requirements are Calimero
- * version 2.6-rc2.
+ * version 2.6.
  *
  * You can safely run this example, the (established) connection is closed directly afterwards. No KNX messages are sent
  * to the KNX network.
