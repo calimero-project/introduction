@@ -23,7 +23,7 @@ application {
 // specify an example we want to run
 tasks.withType<JavaExec> {
 	@Suppress("UNCHECKED_CAST")
-	systemProperties(System.getProperties() as Map<String?, *>)
+	systemProperties(System.getProperties() as Map<String, *>)
 }
 
 version = "3.0-SNAPSHOT"
