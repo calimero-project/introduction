@@ -54,6 +54,6 @@ dependencies {
 	runtimeOnly("io.calimero:calimero-rxtx:$version")
 	runtimeOnly("io.calimero:calimero-usb:$version")
 
-	runtimeOnly("org.slf4j:slf4j-jdk-platform-logging:2.0.12")
-	runtimeOnly("org.slf4j:slf4j-simple:2.0.12")
+	runtimeOnly("org.slf4j:slf4j-jdk-platform-logging:2.0.17")
+	runtimeOnly("org.slf4j:slf4j-simple:2.0.17")
 }
