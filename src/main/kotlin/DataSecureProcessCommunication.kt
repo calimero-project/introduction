@@ -17,7 +17,7 @@ import java.util.HexFormat
  * Because a client application is usually not configured as part of a KNX Data Secure installation, it is
  * not recognized as KNX Data Secure device. Therefore, secure process communication relies on Group Object Diagnostics.
  *
- * Minimum requirements are Calimero version 3.0-SNAPSHOT and Java SE 17 (java.base).
+ * Minimum requirements are Calimero version 3.0-M1 and Java SE 17 (java.base).
  *
  * You can safely run this example; the established connection is closed 10 seconds after creation.
  * No KNX messages are sent to the KNX network.

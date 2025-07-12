@@ -50,7 +50,7 @@ import io.calimero.link.medium.TPSettings;
 
 /**
  * This example shows how to establish a BAOS client link using KNX USB. Minimum requirements are
- * Calimero version &ge; 3.0-SNAPSHOT and Java SE 17 (module java.base).
+ * Calimero version &ge; 3.0-M1 and Java SE 17 (module java.base).
  * <p>
  * You can safely run this example, the (established) link will only query some server items.
  */

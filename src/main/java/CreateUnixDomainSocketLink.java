@@ -29,7 +29,7 @@ import io.calimero.link.medium.TPSettings;
  * This example shows how to establish a client tunneling link to a KNXnet/IP server supporting Unix Domain Sockets
  * (UDS). This type of connection is only applicable for a KNXnet/IP _software_ server which runs on the same host and
  * supports connections over Unix domain sockets.
- * Minimum requirements are Calimero version 3.0-SNAPSHOT and Java SE 17 (java.base).
+ * Minimum requirements are Calimero version 3.0-M1 and Java SE 17 (java.base).
  * <p>
  * You can safely run this example, the (established) connection is closed directly afterwards. No KNX messages are sent
  * to the KNX network.

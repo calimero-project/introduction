@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutionException
 
 /**
  * This example shows how to discover active KNXnet/IP servers in an IP network. Minimum requirements are Calimero
- * version 3.0-SNAPSHOT.
+ * version 3.0-M1.
  *
  * You can safely run this example, no KNX messages are sent to the KNX network.
  */

@@ -24,7 +24,7 @@ import io.calimero.secure.Keyring;
 
 /**
  * Prints the (decrypted) content of a keyring (*.knxkeys) resource. Minimum requirements are Calimero version &ge;
- * 3.0-SNAPSHOT and Java SE 17 (module java.base).
+ * 3.0-M1 and Java SE 17 (module java.base).
  * <p>
  * You can safely run this example, the keyring is not modified, and any content is output to {@code System.out}.
  */

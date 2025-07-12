@@ -25,7 +25,7 @@ tasks.withType<JavaExec> {
 	systemProperties(System.getProperties() as Map<String, *>)
 }
 
-version = "3.0-SNAPSHOT"
+version = "3.0-M1"
 
 java {
 	toolchain {

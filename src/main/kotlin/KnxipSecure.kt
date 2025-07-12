@@ -12,7 +12,7 @@ import java.util.HexFormat
 
 /**
  * This example shows how to establish a secure client routing link using KNX IP Secure. Minimum requirements are
- * Calimero version 3.0-SNAPSHOT.
+ * Calimero version 3.0-M1.
  *
  * You can safely run this example, the (established) connection listens to incoming frames and is closed without
  * sending KNX messages to the KNX network.
