@@ -1,6 +1,6 @@
 /*
     Calimero 3 - A library for KNX network access
-    Copyright (c) 2013, 2021 B. Malinowsky
+    Copyright (c) 2013, 2025 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -42,9 +42,10 @@ public class ProcessCommunication
 
 	public static void main(final String[] args)
 	{
-		final InetSocketAddress remote = new InetSocketAddress(remoteHost, 3671);
+		final var anyLocal = new InetSocketAddress(0);
+		final var remote = new InetSocketAddress(remoteHost, 3671);
 		// Create our network link, and pass it to a process communicator
-		try (KNXNetworkLink knxLink = KNXNetworkLinkIP.newTunnelingLink(null, remote, false, new TPSettings());
+		try (KNXNetworkLink knxLink = KNXNetworkLinkIP.newTunnelingLink(anyLocal, remote, false, new TPSettings());
 				ProcessCommunicator pc = new ProcessCommunicatorImpl(knxLink)) {
 
 			System.out.println("read boolean value from datapoint " + group);

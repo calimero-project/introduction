@@ -1,6 +1,6 @@
 /*
     Calimero 3 - A library for KNX network access
-    Copyright (c) 2015, 2023 B. Malinowsky
+    Copyright (c) 2015, 2025 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -54,8 +54,9 @@ public class GroupMonitor implements ProcessListener {
 	}
 
 	public void run() {
-		final InetSocketAddress remote = new InetSocketAddress(remoteHost, 3671);
-		try (KNXNetworkLink knxLink = KNXNetworkLinkIP.newTunnelingLink(null, remote, false, new TPSettings());
+		final var anyLocal = new InetSocketAddress(0);
+		final var remote = new InetSocketAddress(remoteHost, 3671);
+		try (KNXNetworkLink knxLink = KNXNetworkLinkIP.newTunnelingLink(anyLocal, remote, false, new TPSettings());
 		     ProcessCommunicator pc = new ProcessCommunicatorImpl(knxLink)) {
 
 			// start listening to group notifications using a process listener
