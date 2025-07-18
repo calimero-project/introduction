@@ -18,10 +18,11 @@ private const val remoteHost = "192.168.1.10"
 private const val group = "1/0/2"
 
 fun main() {
+    val anyLocal = InetSocketAddress(0)
     val remote = InetSocketAddress(remoteHost, 3671)
     // Create our network link, and pass it to a process communicator
     try {
-        KNXNetworkLinkIP.newTunnelingLink(InetSocketAddress(0), remote, false, TPSettings()).use {
+        KNXNetworkLinkIP.newTunnelingLink(anyLocal, remote, false, TPSettings()).use {
             ProcessCommunicatorImpl(it).use { pc ->
                 println("read boolean value from datapoint $group")
                 val value = pc.readBool(GroupAddress(group))

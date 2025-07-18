@@ -23,8 +23,9 @@ import java.util.HexFormat
 private const val remoteHost = "192.168.1.10"
 
 fun main() {
+    var anyLocal = InetSocketAddress(0)
     val remote = InetSocketAddress(remoteHost, 3671)
-    KNXNetworkLinkIP.newTunnelingLink(InetSocketAddress(0), remote, false, TPSettings())
+    KNXNetworkLinkIP.newTunnelingLink(anyLocal, remote, false, TPSettings())
         .use {
             ProcessCommunicatorImpl(it).use { pc ->
                 // start listening to group notifications using a process listener
