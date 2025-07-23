@@ -61,6 +61,7 @@ For Kotlin, an example can be run via Gradle by appending "Kt" to the class name
 
 ### Archived examples
 
-* Examples for Calimero v2.6 (requires Java 17) can be found on the [2.6 branch](https://github.com/calimero-project/introduction/tree/2.6)
+* Examples for Calimero v3.0-M1 (requires Java 17) can be found on the [release/3.0-M1 branch](https://github.com/calimero-project/introduction/tree/release/3.0-M1)
+* Examples for Calimero v2.6 (requires Java 17) can be found on the [release/2.6 branch](https://github.com/calimero-project/introduction/tree/release/2.6)
 * Examples for Calimero v2.4 (requires Java 8) can be found on the [release/2.4 branch](https://github.com/calimero-project/introduction/tree/release/2.4)
 * Examples for Calimero v2.3 (or earlier) can be found on the [release/2.3 branch](https://github.com/calimero-project/introduction/tree/release/2.3)
