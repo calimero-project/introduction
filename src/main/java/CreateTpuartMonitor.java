@@ -26,7 +26,7 @@ import io.calimero.link.MonitorFrameEvent;
 
 /**
  * This example shows how to establish a client network monitor ({@link KNXNetworkMonitor}) to a KNX TP1 network using
- * TP-UART serial communication. Minimum requirements are Calimero version 3.0-SNAPSHOT and Java SE 17 (java.base).
+ * TP-UART serial communication. Minimum requirements are Calimero version 3.0-SNAPSHOT and Java 21 (java.base).
  * <p>
  * You can safely run this example; the (established) monitor connection is completely passive. No KNX messages are sent
  * to the KNX network. The network monitor will run for 10 seconds to let you monitor some KNX frames.
