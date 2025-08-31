@@ -76,7 +76,7 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 
 
 	// Runs the programmable device
-	public static void main(final String[] args) throws KNXException, IOException {
+	public static void main(final String[] args) throws IOException {
 		// We need to do three things:
 		// 1) initialize the device logic (this class), which implements the mgmt functionality of our device
 		// 2) instantiate our KNX device
@@ -131,5 +131,5 @@ public class ProgrammableDevice extends KnxDeviceServiceLogic {
 	public void updateDatapointValue(final Datapoint ofDp, final DPTXlator update) {}
 
 	@Override
-	public DPTXlator requestDatapointValue(final Datapoint ofDp) throws KNXException { return null; }
+	public DPTXlator requestDatapointValue(final Datapoint ofDp) { return null; }
 }

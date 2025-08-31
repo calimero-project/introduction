@@ -23,7 +23,7 @@ import java.util.HexFormat
 private const val remoteHost = "192.168.1.10"
 
 fun main() {
-    var anyLocal = InetSocketAddress(0)
+    val anyLocal = InetSocketAddress(0)
     val remote = InetSocketAddress(remoteHost, 3671)
     KNXNetworkLinkIP.newTunnelingLink(anyLocal, remote, false, TPSettings())
         .use {

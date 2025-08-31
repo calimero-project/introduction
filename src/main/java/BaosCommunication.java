@@ -1,6 +1,6 @@
 /*
     Calimero 3 - A library for KNX network access
-    Copyright (c) 2021, 2023 B. Malinowsky
+    Copyright (c) 2021, 2025 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -72,7 +72,7 @@ public class BaosCommunication {
 					else if (svc.subService() == BaosService.GetServerItem) {
 						Object value;
 						@SuppressWarnings("unchecked")
-						final Item<Property> item = (Item<Property>) svc.items().get(0);
+						final Item<Property> item = (Item<Property>) svc.items().getFirst();
 						if (item.info() == Property.SerialNumber)
 							value = SerialNumber.from(item.data());
 						else if (item.info() == Property.ConnectionState)

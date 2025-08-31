@@ -177,5 +177,5 @@ public class LteDevice extends KnxDeviceServiceLogic implements Runnable {
 	public void updateDatapointValue(final Datapoint ofDp, final DPTXlator update) {}
 
 	@Override
-	public DPTXlator requestDatapointValue(final Datapoint ofDp) throws KNXException { return null; }
+	public DPTXlator requestDatapointValue(final Datapoint ofDp) { return null; }
 }

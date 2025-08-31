@@ -1,6 +1,6 @@
 /*
     Calimero 3 - A library for KNX network access
-    Copyright (c) 2017, 2023 B. Malinowsky
+    Copyright (c) 2017, 2025 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -68,14 +68,14 @@ public class DptTranslation
 		System.out.println(t.getValue() + " translated to knx data: 0x" + HexFormat.of().formatHex(t.getData()));
 	}
 
-	private static void createUsingDpt(final byte[] data) throws KNXException, KNXFormatException
+	private static void createUsingDpt(final byte[] data) throws KNXException
 	{
 		final DPTXlator t = TranslatorTypes.createTranslator(DPT_TEMPERATURE);
 		t.setData(data);
 		System.out.println("temperature is " + t.getValue() + " (" + t.getNumericValue() + ")");
 	}
 
-	private static void useDatapointModel(final byte[] data) throws KNXFormatException, KNXException
+	private static void useDatapointModel(final byte[] data) throws KNXException
 	{
 		// we use a map of state-based datapoints
 		final DatapointModel<StateDP> datapoints = new DatapointMap<>();
