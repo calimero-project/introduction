@@ -80,7 +80,7 @@ public class DptTranslation
 		final DatapointModel<StateDP> datapoints = new DatapointMap<>();
 		// add the required datapoints
 		final GroupAddress temperature = new GroupAddress("0/0/1");
-		datapoints.add(new StateDP(temperature, "my temperature", 0, DPT_TEMPERATURE.getID()));
+		datapoints.add(new StateDP(temperature, "my temperature", DPT_TEMPERATURE.dptId()));
 
 		// now we can create a translator for datapoints (if the requested translator is supported by Calimero)
 		if (datapoints.contains(temperature)) {

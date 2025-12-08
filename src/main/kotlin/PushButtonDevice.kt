@@ -57,7 +57,7 @@ fun main() {
     // Every KNX device provides a datapoint model, where all the datapoints of that device are stored.
     // Add the datapoints we are concerned with to the service logic datapoint model. Subsequently, the
     // service logic will notify us about any read/write requests of those datapoints (and only those!).
-    val pushButton = StateDP(dpAddress, deviceName, 0, DPTXlatorBoolean.DPT_SWITCH.id)
+    val pushButton = StateDP(dpAddress, deviceName, DPTXlatorBoolean.DPT_SWITCH.dptId())
     logic.datapointModel.add(pushButton)
 
     // Create the device and the network link on which KNX messages are received from, and sent on

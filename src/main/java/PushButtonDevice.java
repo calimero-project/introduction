@@ -1,6 +1,6 @@
 /*
     Calimero 3 - A library for KNX network access
-    Copyright (c) 2015, 2023 B. Malinowsky
+    Copyright (c) 2015, 2025 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -100,7 +100,7 @@ public class PushButtonDevice extends KnxDeviceServiceLogic
 		// Every KNX device provides a datapoint model, where all the datapoints of that device are stored.
 		// Add the datapoints we are concerned with to the service logic datapoint model. Subsequently, the
 		// service logic will notify us about any read/write requests of those datapoints (and only those!).
-		final StateDP pushButton = new StateDP(dpAddress, deviceName, 0, DPTXlatorBoolean.DPT_SWITCH.getID());
+		final StateDP pushButton = new StateDP(dpAddress, deviceName, DPTXlatorBoolean.DPT_SWITCH.dptId());
 		logic.getDatapointModel().add(pushButton);
 
 		// Create the device and the network link on which KNX messages are received from, and sent on

@@ -1,6 +1,6 @@
 /*
     Calimero 3 - A library for KNX network access
-    Copyright (c) 2016, 2023 B. Malinowsky
+    Copyright (c) 2016, 2025 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ import io.calimero.process.ProcessCommunicatorImpl;
 public class NetworkStateBuffering
 {
 	private static final GroupAddress group = new GroupAddress(1, 0, 3);
-	private static final StateDP dp = new StateDP(group, "my datapoint", 0, DPTXlator8BitUnsigned.DPT_PERCENT_U8.getID());
+	private static final StateDP dp = new StateDP(group, "my datapoint", DPTXlator8BitUnsigned.DPT_PERCENT_U8.dptId());
 
 	public static void main(final String[] args) throws UnknownHostException, KNXException, InterruptedException
 	{
