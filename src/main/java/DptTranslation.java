@@ -70,8 +70,7 @@ public class DptTranslation
 
 	private static void createUsingDpt(final byte[] data) throws KNXException
 	{
-		final DPTXlator t = TranslatorTypes.createTranslator(DPT_TEMPERATURE);
-		t.setData(data);
+		final DPTXlator t = TranslatorTypes.createTranslator(DPT_TEMPERATURE.dptId(), data);
 		System.out.println("temperature is " + t.getValue() + " (" + t.getNumericValue() + ")");
 	}
 
@@ -85,9 +84,8 @@ public class DptTranslation
 
 		// now we can create a translator for datapoints (if the requested translator is supported by Calimero)
 		if (datapoints.contains(temperature)) {
-			final String dpt = datapoints.get(temperature).getDPT();
-			final DPTXlator t = TranslatorTypes.createTranslator(0, dpt);
-			t.setData(data);
+			final var dptId = datapoints.get(temperature).dptId();
+			final DPTXlator t = TranslatorTypes.createTranslator(dptId, data);
 			System.out.println("temperature is " + t.getValue() + " (" + t.getNumericValue() + ")");
 		}
 	}
