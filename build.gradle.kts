@@ -19,10 +19,14 @@ application {
 	mainClass = System.getProperty("mainClass") ?: "DiscoverKnxServers"
 }
 
-// specify an example we want to run
 tasks.withType<JavaExec> {
-	@Suppress("UNCHECKED_CAST")
-	systemProperties(System.getProperties() as Map<String, *>)
+	// list of user-specific properties to pass to the child VM
+	val userProps = listOf(
+		"org.slf4j.simpleLogger.defaultLogLevel",
+	)
+	userProps.forEach { key ->
+		System.getProperty(key)?.let { value -> systemProperty(key, value) }
+	}
 }
 
 version = "3.0-SNAPSHOT"
