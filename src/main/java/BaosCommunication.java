@@ -1,6 +1,6 @@
 /*
     Calimero 3 - A library for KNX network access
-    Copyright (c) 2021, 2025 B. Malinowsky
+    Copyright (c) 2021, 2026 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -50,7 +50,7 @@ import io.calimero.link.medium.TPSettings;
 
 /**
  * This example shows how to establish a BAOS client link using KNX USB. Minimum requirements are
- * Calimero version &ge; 3.0-SNAPSHOT and Java 21 (module java.base).
+ * Calimero version &ge; 3.0-M2 and Java 21 (module java.base).
  * <p>
  * You can safely run this example, the (established) link will only query some server items.
  */

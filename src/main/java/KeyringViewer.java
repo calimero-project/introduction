@@ -1,6 +1,6 @@
 /*
     Calimero 3 - A library for KNX network access
-    Copyright (c) 2019, 2023 B. Malinowsky
+    Copyright (c) 2019, 2026 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ import io.calimero.secure.Keyring;
 
 /**
  * Prints the (decrypted) content of a keyring (*.knxkeys) resource. Minimum requirements are Calimero version &ge;
- * 3.0-SNAPSHOT and Java 21 (module java.base).
+ * 3.0-M2 and Java 21 (module java.base).
  * <p>
  * You can safely run this example, the keyring is not modified, and any content is output to {@code System.out}.
  */

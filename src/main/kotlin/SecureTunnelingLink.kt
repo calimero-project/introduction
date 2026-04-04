@@ -1,6 +1,6 @@
 /*
     Calimero 3 - A library for KNX network access
-    Copyright (c) 2024, 2025 B. Malinowsky
+    Copyright (c) 2024, 2026 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ import java.time.Duration
 
 /**
  * This example shows how to establish a secure client tunneling link using KNX IP Secure. Minimum requirements are
- * Calimero version 3.0-SNAPSHOT and Java 21 (module java.base).
+ * Calimero version 3.0-M2 and Java 21 (module java.base).
  *
  * You can safely run this example, the (established) connection listens to incoming frames and is closed without
  * sending KNX messages to the KNX network.

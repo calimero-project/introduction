@@ -1,6 +1,6 @@
 /*
     Calimero 3 - A library for KNX network access
-    Copyright (c) 2016, 2023 B. Malinowsky
+    Copyright (c) 2016, 2026 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ import io.calimero.serial.usb.UsbConnectionFactory;
 
 /**
  * This example lists all found KNX USB and USB virtual serial devices. Only devices for KNX communication are listed
- * (if Calimero is able to identify them as such). Minimum requirements are Calimero version 3.0-SNAPSHOT and Java 21
+ * (if Calimero is able to identify them as such). Minimum requirements are Calimero version 3.0-M2 and Java 21
  * (java.base).
  * <p>
  * You can safely run this example, no KNX messages are sent to the KNX network.

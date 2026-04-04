@@ -1,6 +1,6 @@
 /*
     Calimero 3 - A library for KNX network access
-    Copyright (c) 2016, 2024 B. Malinowsky
+    Copyright (c) 2016, 2026 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ import io.calimero.serial.ConnectionStatus;
 
 /**
  * This example shows how to establish a client network link ({@link KNXNetworkLink}) to a KNX TP1 network using a KNX
- * USB device. Minimum requirements are Calimero version 3.0-SNAPSHOT and Java 21 (java.base).
+ * USB device. Minimum requirements are Calimero version 3.0-M2 and Java 21 (java.base).
  * <p>
  * You can safely run this example; the established connection is closed 10 seconds after creation.
  * No KNX messages are sent to the KNX network.

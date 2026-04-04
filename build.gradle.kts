@@ -29,7 +29,7 @@ tasks.withType<JavaExec> {
 	}
 }
 
-version = "3.0-SNAPSHOT"
+version = "3.0-M2"
 
 java {
 	toolchain {
