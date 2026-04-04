@@ -15,8 +15,7 @@ fun main() {
         val useNAT = false
         Discoverer.udp(useNAT).timeout(Duration.ofSeconds(3)).search().get()
             .forEach {
-                val res = it.response().toString().replace(", ", "\n\t")
-                println("${it.networkInterface().name} ${it.localEndpoint()} <=> $res")
+                println(it.toString().replace(", ", "\n\t"))
             }
     } catch (e: InterruptedException) {
         System.err.println("Error during KNXnet/IP discovery: $e")

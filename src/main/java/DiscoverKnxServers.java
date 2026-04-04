@@ -1,6 +1,6 @@
 /*
     Calimero 3 - A library for KNX network access
-    Copyright (c) 2016, 2023 B. Malinowsky
+    Copyright (c) 2016, 2026 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,10 +36,7 @@ public class DiscoverKnxServers {
 			// set true to be aware of Network Address Translation (NAT) during discovery
 			final boolean useNAT = false;
 			Discoverer.udp(useNAT).timeout(Duration.ofSeconds(3)).search().get().forEach(r ->
-					System.out.format("%s %s <=> %s%n",
-							r.networkInterface().getName(),
-							r.localEndpoint(),
-							r.response().toString().replace(", ", "\n\t")));
+					System.out.println(r.toString().replace(", ", "\n\t")));
 		}
 		catch (InterruptedException | ExecutionException e) {
 			System.err.println("Error during KNXnet/IP discovery: " + e);
