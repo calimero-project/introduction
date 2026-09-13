@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
 	kotlin("jvm") version "2.4.0"
 	application
-	id("com.github.ben-manes.versions") version "0.62.0"
+	id("io.github.ben-manes.versions") version "0.62.0"
 	`maven-publish`
 	signing
 }
