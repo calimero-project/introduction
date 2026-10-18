@@ -1,6 +1,6 @@
 /*
     Calimero 3 - A library for KNX network access
-    Copyright (c) 2015, 2025 B. Malinowsky
+    Copyright (c) 2015, 2026 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -120,8 +120,8 @@ public class LteDevice extends KnxDeviceServiceLogic implements Runnable {
 
 	@Override
 	public ServiceResult<byte[]> groupReadRequest(final ProcessEvent e) {
-		if (e instanceof LteProcessEvent)
-			return lteGroupReadRequest((LteProcessEvent) e);
+		if (e instanceof final LteProcessEvent lte)
+			return lteGroupReadRequest(lte);
 		return super.groupReadRequest(e);
 	}
 
