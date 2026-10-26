@@ -1,6 +1,6 @@
 /*
     Calimero 3 - A library for KNX network access
-    Copyright (c) 2015, 2025 B. Malinowsky
+    Copyright (c) 2015, 2026 B. Malinowsky
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -83,7 +83,7 @@ public class GroupMonitor implements ProcessListener {
 	// KNX source and destination address, and Application Service Data Unit (ASDU) to System.out.
 	private static void print(final String svc, final ProcessEvent e) {
 		try {
-			System.out.println(LocalTime.now() + " " + e.getSourceAddr() + "->" + e.getDestination() + " " + svc
+			System.out.println(LocalTime.now() + " " + e.getSourceAddr() + "→" + e.getDestination() + " " + svc
 					+ ": " + HexFormat.of().formatHex(e.getASDU()));
 		}
 		catch (final RuntimeException ex) {

@@ -68,7 +68,7 @@ public class DataSecureProcessCommunication {
 
 	private static void print(final String svc, final ProcessEvent pe) {
 		try {
-			System.out.format("%s %s->%s %s: %s%n", LocalTime.now(), pe.getSourceAddr(), pe.getDestination(), svc,
+			System.out.format("%s %s→%s %s: %s%n", LocalTime.now(), pe.getSourceAddr(), pe.getDestination(), svc,
 					HexFormat.of().formatHex(pe.getASDU()));
 		}
 		catch (final RuntimeException rte) {
